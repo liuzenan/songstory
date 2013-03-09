@@ -25,6 +25,7 @@
 		E415EEAA16EAFAB500437179 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EEA916EAFAB500437179 /* second@2x.png */; };
 		E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEEF16EB20DC000F2BFE /* StoryView.m */; };
 		E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEF216EB20E8000F2BFE /* StoryModel.m */; };
+		E417DEFC16EB2667000F2BFE /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */; };
 		E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD116EB1E9D00F82D74 /* SongViewController.m */; };
 		E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD416EB1EAE00F82D74 /* SongModel.m */; };
 		E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD716EB1EBB00F82D74 /* SongView.m */; };
@@ -58,6 +59,8 @@
 		E417DEEF16EB20DC000F2BFE /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
 		E417DEF116EB20E8000F2BFE /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
 		E417DEF216EB20E8000F2BFE /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
+		E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
+		E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		E4786AD016EB1E9D00F82D74 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
 		E4786AD116EB1E9D00F82D74 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
 		E4786AD316EB1EAE00F82D74 /* SongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongModel.h; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				E415EEA716EAFAB500437179 /* second.png */,
 				E415EEA916EAFAB500437179 /* second@2x.png */,
 				E415EE8916EAFAB500437179 /* Supporting Files */,
+				E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */,
+				E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */,
 			);
 			path = SongStory;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				E4786ADC16EB1F8000F82D74 /* StoryViewController.m in Sources */,
 				E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */,
 				E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */,
+				E417DEFC16EB2667000F2BFE /* PlaylistViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
