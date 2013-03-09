@@ -41,6 +41,7 @@
     middle.backgroundColor = [UIColor whiteColor];
     middle.layer.borderColor = [UIColor lightGrayColor].CGColor;
     middle.layer.borderWidth = 1;
+    middle.alpha = 0.9;
     middle.center = inst.center;
     
     UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(inst.center.x, inst.center.y, radius / 1.5, radius / 1.5)];

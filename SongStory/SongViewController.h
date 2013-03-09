@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
+#import <CoreAudio/CoreAudioTypes.h>
+#import <AVFoundation/AVAudioPlayer.h>
 #import "SongView.h"
 #import "SongModel.h"
+#import "Constant.h"
 @interface SongViewController : UIViewController  <UIGestureRecognizerDelegate>
 
 @property (nonatomic,weak) SongView* songview;
 @property (nonatomic,strong) SongModel* songmodel;
-
+@property (nonatomic,strong) AVAudioPlayer * avPlayer;
 + (SongViewController*) songViewControllerWithViewAndModel:(SongView*)songview Model:(SongModel*)songmodel;
 @end

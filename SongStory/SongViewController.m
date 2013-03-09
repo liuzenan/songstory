@@ -13,13 +13,16 @@
 @property (nonatomic,strong) UIPanGestureRecognizer * panGesture;
 @property (nonatomic,strong) UITapGestureRecognizer * tapGesture;
 @property (nonatomic,strong) NSTimer * timer;
+@property (nonatomic,strong) UIImageView *controlImage;
 
 @end
+
+typedef enum {kStatePlay, kStatePause} PlayState;
 
 @implementation SongViewController {
     BOOL isClockWise;
 }
-@synthesize songview,songmodel,timer;
+@synthesize songview,songmodel,timer,avPlayer,controlImage;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,8 +36,26 @@
     if (self = [super init]) {
         self.songview = v;
         self.songmodel = m;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], songmodel.url]];
+        NSData *memoData = [NSData dataWithContentsOfURL:url];
+        self.avPlayer = [[AVAudioPlayer alloc] initWithData:memoData error:nil];
     }
     return self;
+}
+
+- (void)addStateImage:(PlayState)state {
+    if (controlImage) {
+        [controlImage removeFromSuperview];
+        controlImage = nil;
+    }
+    
+    if (state == kStatePlay) {
+        controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_PLAY_IMAGE]];
+    } else if (state == kStatePause) {
+        controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_PAUSE_IMAGE]];
+    }
+    
+    [self.view addSubview:controlImage];
 }
 
 - (void)viewDidLoad
@@ -42,7 +63,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self addGestureRecognizersToView:songview];
+    [self addStateImage:kStatePlay];
 }
+
 
 - (void)loadView {
     self.view = songview;
@@ -104,12 +127,25 @@
 }
 
 - (void) singleTap:(UIRotationGestureRecognizer *)gesture {
-    NSLog(@"tap",nil);
     if (timer) {
-        [self stopRotate];
+        [self stop];
+        
     } else {
-        [self startRotate];
+        [self play];
     }
 }
 
+- (void) stop {
+    [self addStateImage:kStatePause];
+    [avPlayer stop];
+    [self stopRotate];
+}
+
+- (void)play
+{
+   
+    [self startRotate];
+    [avPlayer prepareToPlay];
+    [avPlayer play];
+}
 @end

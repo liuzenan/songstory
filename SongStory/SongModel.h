@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface SongModel : NSObject
+@property NSString *artist;
+@property NSString *title;
+@property NSString *album;
+@property NSString *url;
+@property NSString *writer;
 
++(SongModel *)songModelWith:(NSString*)artist Album:(NSString*)album Title:(NSString*)title Writer:(NSString*)writer URL:(NSString*)url;
 @end

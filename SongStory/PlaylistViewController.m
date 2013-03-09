@@ -9,11 +9,11 @@
 #import "PlaylistViewController.h"
 
 @interface PlaylistViewController ()
-
+@property (nonatomic,strong) MPMusicPlayerController * musicPlayer;
 @end
 
 @implementation PlaylistViewController
-
+@synthesize musicPlayer;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
