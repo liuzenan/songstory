@@ -23,6 +23,12 @@
 		E415EEA616EAFAB500437179 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E415EEA516EAFAB500437179 /* SecondViewController.m */; };
 		E415EEA816EAFAB500437179 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EEA716EAFAB500437179 /* second.png */; };
 		E415EEAA16EAFAB500437179 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EEA916EAFAB500437179 /* second@2x.png */; };
+		E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEEF16EB20DC000F2BFE /* StoryView.m */; };
+		E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEF216EB20E8000F2BFE /* StoryModel.m */; };
+		E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD116EB1E9D00F82D74 /* SongViewController.m */; };
+		E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD416EB1EAE00F82D74 /* SongModel.m */; };
+		E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD716EB1EBB00F82D74 /* SongView.m */; };
+		E4786ADC16EB1F8000F82D74 /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786ADB16EB1F8000F82D74 /* StoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +54,18 @@
 		E415EEA516EAFAB500437179 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		E415EEA716EAFAB500437179 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		E415EEA916EAFAB500437179 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		E417DEEE16EB20DC000F2BFE /* StoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryView.h; sourceTree = "<group>"; };
+		E417DEEF16EB20DC000F2BFE /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
+		E417DEF116EB20E8000F2BFE /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
+		E417DEF216EB20E8000F2BFE /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
+		E4786AD016EB1E9D00F82D74 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
+		E4786AD116EB1E9D00F82D74 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
+		E4786AD316EB1EAE00F82D74 /* SongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongModel.h; sourceTree = "<group>"; };
+		E4786AD416EB1EAE00F82D74 /* SongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongModel.m; sourceTree = "<group>"; };
+		E4786AD616EB1EBB00F82D74 /* SongView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongView.h; sourceTree = "<group>"; };
+		E4786AD716EB1EBB00F82D74 /* SongView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongView.m; sourceTree = "<group>"; };
+		E4786ADA16EB1F8000F82D74 /* StoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewController.h; sourceTree = "<group>"; };
+		E4786ADB16EB1F8000F82D74 /* StoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +112,8 @@
 		E415EE8816EAFAB500437179 /* SongStory */ = {
 			isa = PBXGroup;
 			children = (
+				E4786AD916EB1EE600F82D74 /* Story */,
+				E4786ACF16EB1E8800F82D74 /* Song */,
 				E415EE9116EAFAB500437179 /* AppDelegate.h */,
 				E415EE9216EAFAB500437179 /* AppDelegate.m */,
 				E415EE9A16EAFAB500437179 /* MainStoryboard.storyboard */,
@@ -122,6 +142,32 @@
 				E415EE9816EAFAB500437179 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E4786ACF16EB1E8800F82D74 /* Song */ = {
+			isa = PBXGroup;
+			children = (
+				E4786AD016EB1E9D00F82D74 /* SongViewController.h */,
+				E4786AD116EB1E9D00F82D74 /* SongViewController.m */,
+				E4786AD316EB1EAE00F82D74 /* SongModel.h */,
+				E4786AD416EB1EAE00F82D74 /* SongModel.m */,
+				E4786AD616EB1EBB00F82D74 /* SongView.h */,
+				E4786AD716EB1EBB00F82D74 /* SongView.m */,
+			);
+			name = Song;
+			sourceTree = "<group>";
+		};
+		E4786AD916EB1EE600F82D74 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				E4786ADA16EB1F8000F82D74 /* StoryViewController.h */,
+				E4786ADB16EB1F8000F82D74 /* StoryViewController.m */,
+				E417DEEE16EB20DC000F2BFE /* StoryView.h */,
+				E417DEEF16EB20DC000F2BFE /* StoryView.m */,
+				E417DEF116EB20E8000F2BFE /* StoryModel.h */,
+				E417DEF216EB20E8000F2BFE /* StoryModel.m */,
+			);
+			name = Story;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +244,12 @@
 				E415EE9316EAFAB500437179 /* AppDelegate.m in Sources */,
 				E415EE9F16EAFAB500437179 /* FirstViewController.m in Sources */,
 				E415EEA616EAFAB500437179 /* SecondViewController.m in Sources */,
+				E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */,
+				E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */,
+				E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */,
+				E4786ADC16EB1F8000F82D74 /* StoryViewController.m in Sources */,
+				E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */,
+				E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +372,7 @@
 				E415EEAF16EAFAB500437179 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
