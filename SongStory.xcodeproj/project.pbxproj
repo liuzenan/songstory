@@ -69,6 +69,7 @@
 		1DF0A17616EBD63700D4BC20 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		1DF0A17716EBD63700D4BC20 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		1DF0A17916EBF04700D4BC20 /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music1.mp3; path = ../../../Desktop/music1.mp3; sourceTree = "<group>"; };
+		1DF0A17B16EBF83600D4BC20 /* SongPlayListDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongPlayListDelegate.h; sourceTree = "<group>"; };
 		E415EE7F16EAFAB500437179 /* SongStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SongStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E415EE8216EAFAB500437179 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E415EE8416EAFAB500437179 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -189,6 +190,7 @@
 				E415EEA516EAFAB500437179 /* SecondViewController.m */,
 				E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */,
 				E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */,
+				1DF0A17B16EBF83600D4BC20 /* SongPlayListDelegate.h */,
 				1D77DA0416EB9EC1003A6F9F /* Constant.h */,
 				1D77DA0516EB9EC1003A6F9F /* Constant.m */,
 				E415EE8916EAFAB500437179 /* Supporting Files */,

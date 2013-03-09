@@ -14,6 +14,12 @@
 @property NSString *album;
 @property NSString *url;
 @property NSString *writer;
+@property NSString *imageName;
 
-+(SongModel *)songModelWith:(NSString*)artist Album:(NSString*)album Title:(NSString*)title Writer:(NSString*)writer URL:(NSString*)url;
++(SongModel *)songModelWith:(NSString*)artist
+                      Album:(NSString*)album
+                      Title:(NSString*)title
+                     Writer:(NSString*)writer
+                  ImageName:(NSString*)image
+                        URL:(NSString*)url;
 @end

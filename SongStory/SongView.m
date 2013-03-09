@@ -44,7 +44,7 @@
                           delay:5.0
                         options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         progress.layer.opacity = 0.2;
+                         progress.layer.opacity = 0.1;
                      }completion:^(BOOL finished){
                          
                      }];
@@ -102,13 +102,15 @@
         self.layer.masksToBounds = YES;
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.layer.borderWidth = 1.5;
-        
+        CALayer* shadowLayer = [CALayer layer];
+        [self.layer addSublayer:shadowLayer];
+      
         UIView *middle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 2, radius / 2)];
         middle.layer.cornerRadius = radius / 4;
         middle.backgroundColor = [UIColor whiteColor];
         middle.layer.borderColor = [UIColor lightGrayColor].CGColor;
         middle.layer.borderWidth = 1;
-        middle.alpha = 0.9;
+        middle.alpha = 1;
         middle.center = self.center;
         
         UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 1.5, radius / 1.5)];
@@ -120,7 +122,6 @@
         
         [self addSubview:circle];
         [self addSubview:middle];
-    
     }
     return self;
 }

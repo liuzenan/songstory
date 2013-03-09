@@ -19,7 +19,8 @@
 @property (nonatomic,strong) SongModel* songmodel;
 @property (nonatomic,strong) AVAudioPlayer * avPlayer;
 + (SongViewController*) songViewControllerWithViewAndModel:(SongView*)songview Model:(SongModel*)songmodel;
-
+- (void) stop;
 - (void) pause;
 - (void) play;
+- (void) jumpTo:(CGFloat)percent;
 @end

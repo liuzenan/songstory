@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
-@interface PlaylistViewController : UIViewController
+#import "SongViewController.h"
+#import "SongPlayListDelegate.h"
+@interface PlaylistViewController : UIViewController<UIGestureRecognizerDelegate,SongPlayListDelegate>
 
 @end
