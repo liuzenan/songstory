@@ -21,6 +21,10 @@
     UIImage* image = [UIImage imageNamed:@"cover1.jpg"];
     SongView* view = [SongView songViewWithImageAndRadius:image :100];
     [self.view addSubview:view];
+    SongModel* model = [[SongModel alloc] init];
+    SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
+    [self addChildViewController:svc];
+    
 }
 
 - (void)didReceiveMemoryWarning

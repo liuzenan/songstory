@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface SongViewController : UIViewController
+#import "SongView.h"
+#import "SongModel.m"
+@interface SongViewController : UIViewController  <UIGestureRecognizerDelegate>
 
+@property (nonatomic,weak) SongView* songview;
+@property (nonatomic,strong) SongModel* songmodel;
+
++ (SongViewController*) songViewControllerWithViewAndModel:(SongView*)songview Model:(SongModel*)songmodel;
 @end
