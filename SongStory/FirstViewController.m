@@ -18,6 +18,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    UIImage* image = [UIImage imageNamed:@"cover1.jpg"];
+    SongView* view = [SongView songViewWithImageAndRadius:image :100];
+    [self.view addSubview:view];
 }
 
 - (void)didReceiveMemoryWarning

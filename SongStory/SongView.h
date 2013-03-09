@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SongView : UIView
-
+#import <QuartzCore/CoreAnimation.h>
+@interface SongView : UIImageView
++ (SongView*) songViewWithImageAndRadius:(UIImage*)image :(CGFloat)radius;
 @end
