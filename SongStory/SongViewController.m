@@ -13,16 +13,17 @@
 @property (nonatomic,strong) UIPanGestureRecognizer * panGesture;
 @property (nonatomic,strong) UITapGestureRecognizer * tapGesture;
 @property (nonatomic,strong) NSTimer * timer;
-@property (nonatomic,strong) UIImageView *controlImage;
-
+extern CGFloat const UPDATE_INTERVAL;
 @end
 
-typedef enum {kStatePlay, kStatePause} PlayState;
 
 @implementation SongViewController {
-    BOOL isClockWise;
+    CGPoint lastPoint;
 }
-@synthesize songview,songmodel,timer,avPlayer,controlImage;
+
+CGFloat const UPDATE_INTERVAL = 0.01;
+
+@synthesize songview,songmodel,timer,avPlayer;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,31 +40,21 @@ typedef enum {kStatePlay, kStatePause} PlayState;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], songmodel.url]];
         NSData *memoData = [NSData dataWithContentsOfURL:url];
         self.avPlayer = [[AVAudioPlayer alloc] initWithData:memoData error:nil];
+        avPlayer.delegate = self;
     }
     return self;
 }
 
-- (void)addStateImage:(PlayState)state {
-    if (controlImage) {
-        [controlImage removeFromSuperview];
-        controlImage = nil;
-    }
-    
-    if (state == kStatePlay) {
-        controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_PLAY_IMAGE]];
-    } else if (state == kStatePause) {
-        controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_PAUSE_IMAGE]];
-    }
-    
-    [self.view addSubview:controlImage];
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [self stop];
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self addGestureRecognizersToView:songview];
-    [self addStateImage:kStatePlay];
 }
 
 
@@ -82,6 +73,7 @@ typedef enum {kStatePlay, kStatePause} PlayState;
 }
 
 
+
 - (void)addGestureRecognizersToView:(UIView *)the_view {
     
     the_view.userInteractionEnabled = YES;
@@ -98,15 +90,51 @@ typedef enum {kStatePlay, kStatePause} PlayState;
 }
 
 - (void) pan:(UIPanGestureRecognizer *)gesture {
-    NSLog(@"Pan",nil);
-    [gesture setTranslation:CGPointMake(0, 0) inView:gesture.view.superview];
+    if (avPlayer == nil || !avPlayer.playing) {
+        return;
+    }
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [songview showProgressBar];
+        lastPoint = [gesture locationInView:gesture.view.superview];
+        //Stop auto rotate
+        [timer invalidate];
+        timer = nil;
+        return;
+    } else if (gesture.state == UIGestureRecognizerStateEnded && timer == nil) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(update) userInfo:nil repeats:YES];
+        [self jumpTo:songview.progress.percent / 100.0];
+    }
+    CGPoint curPoint = [gesture locationInView:gesture.view.superview];
+    CGFloat v1_x = lastPoint.x - gesture.view.center.x;
+    CGFloat v1_y = lastPoint.y - gesture.view.center.y;
+    
+    CGFloat v2_x = curPoint.x - gesture.view.center.x;
+    CGFloat v2_y = curPoint.y - gesture.view.center.y;
+    
+    CGFloat temp1 = (sqrt(v1_x * v1_x + v1_y * v1_y) * sqrt(v2_x * v2_x + v2_y * v2_y));
+    CGFloat temp2 = (v1_x * v2_x + v1_y * v2_y);
+    CGFloat angle = acosf(temp2 / temp1);
+    
+    CGPoint translate = [gesture translationInView:gesture.view.superview];
+    if ((translate.x > 0 && curPoint.y < songview.center.y) || (translate.x < 0 && curPoint.y > songview.center.y)) {
+        angle = angle;
+        // Update progress bar clockwise
+        [self changeProgress:0.5];
+    } else {
+        // Update progress bar anti-clockwise
+        [self changeProgress:-0.5];
+        angle = - angle;
+    }
+    gesture.view.transform = CGAffineTransformRotate(gesture.view.transform, angle);
+    lastPoint = curPoint;
+    [gesture setTranslation:CGPointMake(0, 0) inView:gesture.view];
 }
 
 
 
 - (void) startRotate {
     if (timer == nil) {
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(rotateView) userInfo:nil repeats:YES];
+        timer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(update) userInfo:nil repeats:YES];
     }
 }
 
@@ -118,34 +146,70 @@ typedef enum {kStatePlay, kStatePause} PlayState;
     }
 }
 
+- (void)update {
+    [self rotateView];
+    [self changeProgress:100 * UPDATE_INTERVAL/avPlayer.duration];
+}
+
 - (void) rotateView {
-    if (isClockWise) {
-        songview.transform = CGAffineTransformRotate(songview.transform, -M_PI / 800);
-    } else {
-        songview.transform = CGAffineTransformRotate(songview.transform, M_PI / 800);
-    }
+    songview.transform = CGAffineTransformRotate(songview.transform, M_PI / 800);
 }
 
 - (void) singleTap:(UIRotationGestureRecognizer *)gesture {
     if (timer) {
-        [self stop];
+        [self pause];
         
     } else {
         [self play];
     }
 }
 
+- (void) pause {
+    [songview addStateImage:kStatePause];
+    [avPlayer stop];
+    [self stopRotate];
+}
+
 - (void) stop {
-    [self addStateImage:kStatePause];
+    [songview addStateImage:kStateStop];
+    [self setProgressPercent:0];
     [avPlayer stop];
     [self stopRotate];
 }
 
 - (void)play
 {
-   
+    [songview removeStateImage];
     [self startRotate];
     [avPlayer prepareToPlay];
     [avPlayer play];
 }
+
+- (void)jumpTo:(CGFloat)percent {
+    if (percent < 0) {
+        percent = 1 - percent;
+    }
+    avPlayer.currentTime = - avPlayer.currentTime;
+
+    avPlayer.currentTime = avPlayer.duration * percent;
+}
+
+- (void) setProgressPercent:(CGFloat)p_percent{
+    if (p_percent >= 0 && p_percent <= 100) {
+        songview.progress.percent = p_percent;
+        [songview.progress setNeedsDisplay];
+    }
+}
+
+
+- (void)changeProgress:(CGFloat)delta
+{
+    if (songview.progress.percent + delta <= 100 && songview.progress.percent + delta >= 0) {
+    // If we can decrement our percentage, do so, and redraw the view
+        int temp = (songview.progress.percent + delta) / 100.0;
+        songview.progress.percent = (songview.progress.percent + delta) - temp * 100.0;
+        [songview.progress setNeedsDisplay];
+    }
+}
+
 @end

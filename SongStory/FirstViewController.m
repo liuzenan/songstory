@@ -20,7 +20,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     UIImage* image1 = [UIImage imageNamed:@"cover1.jpg"];
     SongView* view1 = [SongView songViewWithImageAndRadius:image1 :100];
-   
+    
     SongModel* model1 = [SongModel songModelWith:@"Tylor Swift"
                                            Album:@"Fearkess"
                                            Title:@"Fearkess"
@@ -50,8 +50,9 @@
                                              URL:@"music3.mp3"];
     
     SongViewController *svc3 = [SongViewController songViewControllerWithViewAndModel:view3 Model:model3];
-    [self addSubControllerAndView:svc3 ToView:self.view];
-
+   view1.center = CGPointMake(150,150);
+    [self addSubControllerAndView:svc1 ToView:self.view];
+    
     
 }
 

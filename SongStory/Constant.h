@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef enum {kStateInit, kStatePause, kStateStop} PlayState;
 @interface Constant : NSObject
 extern NSString * const DEFAULT_PLAY_IMAGE;
 extern NSString * const DEFAULT_PAUSE_IMAGE;
-
+extern NSString * const DEFAULT_STOP_IMAGE;
+extern NSString * const DEFAULT_PROGRESS_IMAGE;
 @end

@@ -11,5 +11,7 @@
 @implementation Constant
 NSString * const DEFAULT_PLAY_IMAGE = @"play.png";
 NSString * const DEFAULT_PAUSE_IMAGE = @"pause.png";
+NSString * const DEFAULT_STOP_IMAGE = @"stop.png";
+NSString * const DEFAULT_PROGRESS_IMAGE = @"circle.png";
 
 @end

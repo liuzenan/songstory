@@ -13,10 +13,13 @@
 #import "SongView.h"
 #import "SongModel.h"
 #import "Constant.h"
-@interface SongViewController : UIViewController  <UIGestureRecognizerDelegate>
+@interface SongViewController : UIViewController  <UIGestureRecognizerDelegate,AVAudioPlayerDelegate>
 
 @property (nonatomic,weak) SongView* songview;
 @property (nonatomic,strong) SongModel* songmodel;
 @property (nonatomic,strong) AVAudioPlayer * avPlayer;
 + (SongViewController*) songViewControllerWithViewAndModel:(SongView*)songview Model:(SongModel*)songmodel;
+
+- (void) pause;
+- (void) play;
 @end
