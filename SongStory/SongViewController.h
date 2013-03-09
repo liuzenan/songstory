@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SongView.h"
-#import "SongModel.m"
+#import "SongModel.h"
 @interface SongViewController : UIViewController  <UIGestureRecognizerDelegate>
 
 @property (nonatomic,weak) SongView* songview;

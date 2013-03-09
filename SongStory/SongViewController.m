@@ -12,10 +12,14 @@
 
 @property (nonatomic,strong) UIPanGestureRecognizer * panGesture;
 @property (nonatomic,strong) UITapGestureRecognizer * tapGesture;
+@property (nonatomic,strong) NSTimer * timer;
+
 @end
 
-@implementation SongViewController
-@synthesize songview,songmodel;
+@implementation SongViewController {
+    BOOL isClockWise;
+}
+@synthesize songview,songmodel,timer;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -72,11 +76,40 @@
 
 - (void) pan:(UIPanGestureRecognizer *)gesture {
     NSLog(@"Pan",nil);
-    
+    [gesture setTranslation:CGPointMake(0, 0) inView:gesture.view.superview];
+}
+
+
+
+- (void) startRotate {
+    if (timer == nil) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(rotateView) userInfo:nil repeats:YES];
+    }
+}
+
+
+- (void) stopRotate {
+    if (timer) {
+        [timer invalidate];
+        timer = nil;
+    }
+}
+
+- (void) rotateView {
+    if (isClockWise) {
+        songview.transform = CGAffineTransformRotate(songview.transform, -M_PI / 800);
+    } else {
+        songview.transform = CGAffineTransformRotate(songview.transform, M_PI / 800);
+    }
 }
 
 - (void) singleTap:(UIRotationGestureRecognizer *)gesture {
     NSLog(@"tap",nil);
+    if (timer) {
+        [self stopRotate];
+    } else {
+        [self startRotate];
+    }
 }
 
 @end
