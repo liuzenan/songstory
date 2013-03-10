@@ -51,6 +51,7 @@
 		E45114B016EBBA0F0045411C /* bariol_regular_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AD16EBBA0F0045411C /* bariol_regular_italic.ttf */; };
 		E45114B116EBBA0F0045411C /* bariol_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AE16EBBA0F0045411C /* bariol_regular.ttf */; };
 		E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45114B316EBCACD0045411C /* StoryListViewController.m */; };
+		E45BE2BE16EC6272007460C6 /* SongStoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45BE2BD16EC6272007460C6 /* SongStoryView.m */; };
 		E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD116EB1E9D00F82D74 /* SongViewController.m */; };
 		E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD416EB1EAE00F82D74 /* SongModel.m */; };
 		E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD716EB1EBB00F82D74 /* SongView.m */; };
@@ -132,6 +133,8 @@
 		E45114AE16EBBA0F0045411C /* bariol_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bariol_regular.ttf; path = Fonts/bariol_regular.ttf; sourceTree = "<group>"; };
 		E45114B216EBCACD0045411C /* StoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryListViewController.h; sourceTree = "<group>"; };
 		E45114B316EBCACD0045411C /* StoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryListViewController.m; sourceTree = "<group>"; };
+		E45BE2BC16EC6272007460C6 /* SongStoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongStoryView.h; sourceTree = "<group>"; };
+		E45BE2BD16EC6272007460C6 /* SongStoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongStoryView.m; sourceTree = "<group>"; };
 		E4786AD016EB1E9D00F82D74 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
 		E4786AD116EB1E9D00F82D74 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
 		E4786AD316EB1EAE00F82D74 /* SongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongModel.h; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				E4786AD716EB1EBB00F82D74 /* SongView.m */,
 				1DF0A17616EBD63700D4BC20 /* ProgressView.h */,
 				1DF0A17716EBD63700D4BC20 /* ProgressView.m */,
+				E45BE2BC16EC6272007460C6 /* SongStoryView.h */,
+				E45BE2BD16EC6272007460C6 /* SongStoryView.m */,
 			);
 			name = Song;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				E451149216EB29550045411C /* User.m in Sources */,
 				E451149616EB2C720045411C /* Comment.m in Sources */,
 				E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */,
+				E45BE2BE16EC6272007460C6 /* SongStoryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
