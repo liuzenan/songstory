@@ -19,6 +19,7 @@ extern CGFloat const UPDATE_INTERVAL;
 
 @implementation SongViewController {
     CGPoint lastPoint;
+    UIView *informationBox;
 }
 
 CGFloat const UPDATE_INTERVAL = 0.01;
@@ -219,6 +220,12 @@ CGFloat const UPDATE_INTERVAL = 0.01;
 - (void) togglePlayView:(CGPoint)center :(CGAffineTransform)transform {
     
     if (songview.userInteractionEnabled == YES) {
+        if (!informationBox) {
+            informationBox = [[UIView alloc] init];
+            //informationBox.center = CGPointMake(center.x );
+            informationBox.alpha = 0;
+            
+        }
         songview.userInteractionEnabled = NO;
         [UIView animateWithDuration:1.0
                          animations:^{
@@ -228,6 +235,7 @@ CGFloat const UPDATE_INTERVAL = 0.01;
                              songview.progress.alpha = 0;
                              songview.transform = transform;
                              songview.center = center;
+                             informationBox.alpha = 1;
                          }
                          completion:^(BOOL finished){
                              NSLog(@"Done!");
@@ -240,6 +248,7 @@ CGFloat const UPDATE_INTERVAL = 0.01;
                              songview.middle.alpha = 1;
                              songview.controlImage.alpha = 1;
                              songview.progress.alpha = 1;
+                             informationBox.alpha = 0;
                              songview.transform = transform;
                              songview.center = center;
                          }
