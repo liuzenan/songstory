@@ -133,8 +133,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 13;
     CGFloat delta = ([UIScreen mainScreen].bounds.size.width - width) / 2;
     scrollView.frame = CGRectMake(self.view.frame.origin.x + delta, self.view.frame.origin.y, width, self.view.frame.size.height - 49);
     [scrollView setContentSize:CGSizeMake(width * [songs count] ,scrollView.frame.size.height - DEFAULT_SONG_VIEW_RADIUS)];
-    scrollView.layer.borderColor = [UIColor blackColor].CGColor;
-    scrollView.layer.borderWidth =1;
+
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
