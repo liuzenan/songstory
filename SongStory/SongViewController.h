@@ -23,4 +23,5 @@
 - (void) pause;
 - (void) play;
 - (void) jumpTo:(CGFloat)percent;
+- (void) isGoingToChange;
 @end

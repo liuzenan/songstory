@@ -185,6 +185,11 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     [avPlayer play];
 }
 
+
+- (void) isGoingToChange {
+    [self stop];
+    [songview removeStateImage];
+}
 - (void)jumpTo:(CGFloat)percent {
     if (percent < 0) {
         percent = 1 - percent;

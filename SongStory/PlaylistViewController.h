@@ -11,5 +11,6 @@
 #import "SongPlayListDelegate.h"
 @interface PlaylistViewController : UIViewController<UIGestureRecognizerDelegate,SongPlayListDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITabBarItem *playListTab;
 
 @end

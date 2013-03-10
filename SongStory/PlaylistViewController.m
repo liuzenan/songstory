@@ -9,16 +9,26 @@
 #import "PlaylistViewController.h"
 
 @interface PlaylistViewController ()
-@property (nonatomic,strong) UIPanGestureRecognizer* panGesture;
+@property (nonatomic,strong) UISwipeGestureRecognizer* rightSwipeGesture;
+@property (nonatomic,strong) UISwipeGestureRecognizer* leftSwipeGesture;
+
 @property (nonatomic,strong) NSMutableArray* songs;
+extern CGFloat const DEFAULT_SONG_VIEW_RADIUS;
+extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 
 @end
 
 @implementation PlaylistViewController {
     int curSong;
+    SongViewController *curSongController;
     CGPoint panStartPoint;
 }
-@synthesize songs,scrollView;
+@synthesize songs,scrollView,playListTab;
+CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100.0;
+CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
+
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,12 +43,9 @@
     [super viewDidLoad];
     [self loadSongModels];
     [self loadSongs];
+    [self addGestureRecognizersToView:scrollView];
 }
-- (void) loadSongs {
-    for (int i = 0;i < [songs count]; i++) {
-        [self loadSongAtIndex:i];
-    }
-}
+
 - (void) loadSongModels {
     SongModel* model1 = [SongModel songModelWith:@"Tylor Swift"
                                            Album:@"Fearkess"
@@ -83,59 +90,103 @@
     
     the_view.userInteractionEnabled = YES;
     
-    //self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    //[self.panGesture setDelegate:self];
-    //[the_view addGestureRecognizer:self.panGesture];
-
-}
-
-- (void) nextSong {
-    if (curSong + 1 < [songs count]) {
-        NSLog(@"Next",nil);
-        //[self loadSongAtIndex:curSong + 1];
-    }
-}
-
-- (void) loadSongAtIndex:(CGFloat)index {
-    if ([songs count] > index) {
-        SongModel * model = (SongModel*)[songs objectAtIndex:index];
-        UIImage* image = [UIImage imageNamed:model.imageName];
-        SongView* view = [SongView songViewWithImageAndRadius:image :100];
-        SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-        view.center = CGPointMake(self.view.center.x + index * self.view.frame.size.width, self.view.center.y - 100);
-        [self addSubControllerAndView:svc ToView:self.view];
-        [self addGestureRecognizersToView:self.view];
-        curSong = index;
-    }
-}
-
-- (void) stopCurSong {
+    self.rightSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
+    [self.rightSwipeGesture setNumberOfTouchesRequired:1];
+    [self.rightSwipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.rightSwipeGesture setDelegate:self];
+    [the_view addGestureRecognizer:self.rightSwipeGesture];
     
+    self.leftSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
+    [self.leftSwipeGesture setNumberOfTouchesRequired:1];
+    [self.leftSwipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.leftSwipeGesture setDelegate:self];
+    [the_view addGestureRecognizer:self.leftSwipeGesture];
+
+}
+
+- (void) loadSongs {
+    if ([songs count] == 0) {
+        //TODO Tell user there is no song
+        return;
+    }
+    
+    for (int i = 0; i < [songs count]; i++) {
+        [self loadSongAtIndex:i];
+    }
+    
+   // CGFloat scrollViewWidth = [songs count] * (2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION) + DEFAULT_IPHONE4_WIDTH - 2 *DEFAULT_SONG_VIEW_RADIUS - 10;
+   // [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 500)];
+}
+- (void) nextSong {
+     NSLog(@"Next",nil);
+     
+    if (curSong + 1 < [songs count]) {
+        [curSongController isGoingToChange];
+        for (SongViewController *svc in [self childViewControllers]) {
+            CGPoint newCenter = CGPointMake(svc.songview.center.x - 2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION, svc.songview.center.y);
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
+                             animations:^{
+                                 svc.songview.center  = newCenter;
+                             }completion:^(BOOL finished){
+                                 
+            }];
+        }
+    }
 }
 
 - (void) lastSong {
     NSLog(@"Last",nil);
     if (curSong - 1  >= 0) {
-        //[self loadSongAtIndex:curSong - 1];
+        [curSongController isGoingToChange];
+        for (SongViewController *svc in [self childViewControllers]) {
+            CGPoint newCenter = CGPointMake(svc.songview.center.x + 2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION, svc.songview.center.y);
+            [UIView animateWithDuration:0.5
+                                  delay:0.0
+                                options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
+                             animations:^{
+                                 svc.songview.center  = newCenter;
+                             }completion:^(BOOL finished){
+                                 
+                             }];
+        }
+
     }
 }
 
-- (void) pan:(UIPanGestureRecognizer *)gesture {
-    //NSLog(@"Pan",nil);
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        panStartPoint = [gesture locationInView:self.view];
-    }
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        CGPoint translate = [gesture translationInView:self.view];
-        CGPoint curPoint = [gesture locationInView:self.view];
-        CGFloat dist_x = (panStartPoint.x - curPoint.x);
-        CGFloat dist_y = (panStartPoint.y - curPoint.y);
-        CGFloat dist = sqrt(dist_x * dist_x + dist_y * dist_y);
-        if (dist > self.view.frame.size.width / 4 && translate.x > 0) {
-            [self nextSong];
-        } else if (dist > self.view.frame.size.width / 4 && translate.x < 0) {
-            [self lastSong];
-        }
-    }
+/*
+- (void) loadSongViewAtIndexAsLastSong:(CGFloat)index {
+    SongModel * model = (SongModel*)[songs objectAtIndex:index];
+    UIImage* image = [UIImage imageNamed:model.imageName];
+    SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_WIDTH];
+}
+
+- (void) loadSongViewAtIndexAsNextSong:(CGFloat)index {
+    
+}*/
+- (void) loadSongAtIndex:(CGFloat)index {
+    
+    // Load current song
+    SongModel * model = (SongModel*)[songs objectAtIndex:index];
+    UIImage* image = [UIImage imageNamed:model.imageName];
+    SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
+    SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
+    view.center = CGPointMake(self.view.center.x + index * (DEFAULT_SONG_VIEW_RADIUS * 2 + DEFAULT_SONG_VIEW_SEPERATION), self.view.center.y - DEFAULT_SONG_VIEW_RADIUS);
+    [self addSubControllerAndView:svc ToView:self.view];
+    curSong = index;
+    curSongController = svc;
+}
+
+
+- (void) swipeRight:(UISwipeGestureRecognizer *)gesture {
+    [self lastSong];
+    
+}
+- (void) swipeLeft:(UISwipeGestureRecognizer *)gesture {
+    [self nextSong];
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 @end

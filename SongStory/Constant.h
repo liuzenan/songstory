@@ -13,4 +13,7 @@ extern NSString * const DEFAULT_PLAY_IMAGE;
 extern NSString * const DEFAULT_PAUSE_IMAGE;
 extern NSString * const DEFAULT_STOP_IMAGE;
 extern NSString * const DEFAULT_PROGRESS_IMAGE;
+extern CGFloat const DEFAULT_IPHONE4_WIDTH;
+extern CGFloat const DEFAULT_IPHONE4_WIDTH;
+
 @end
