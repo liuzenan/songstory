@@ -15,4 +15,6 @@
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSDate *commentTime;
 
+- (id) initWithUser:(User*)user Comment:(NSString*)comment CurrentTime:(NSDate*)commentTime;
+
 @end

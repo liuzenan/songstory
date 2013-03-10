@@ -31,7 +31,7 @@
 - (id)initWithFrame:(CGRect)frame
           StoryInfo:(UIView*)storyInfo
           StoryView:(UILabel*)storyView
-           Comments:(UITableView*)comments
+           Comments:(UIView*)comments
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -46,7 +46,7 @@
         self.frame = CGRectMake(STORY_MARGIN,
                                 50,
                                 self.storyInfo.frame.size.width,
-                                self.storyInfo.frame.size.height + self.storyView.frame.size.height);
+                                self.storyInfo.frame.size.height + self.storyView.frame.size.height + self.comments.frame.size.height);
     }
     
     return self;

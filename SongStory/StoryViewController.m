@@ -34,7 +34,21 @@
 - (id)initWithName:(NSString*)username LikeCount:(NSInteger)count Story:(NSString*)story Comments:(NSArray*)comments
 {
     if (self = [super init]) {
-        self.storyModel = [[StoryModel alloc] initWithUser:[[User alloc] initWithName:username] Story:story LikeCount:count Comments:comments];
+        NSMutableArray *commentsList = [NSMutableArray array];
+        
+        for (int i = 0; i < 10; i++) {
+            Comment *comment = [[Comment alloc] initWithUser:[[User alloc] initWithName:username]
+                                                     Comment:@"This is a great story, thanks for sharing!"
+                                                 CurrentTime:[[NSDate alloc] initWithTimeIntervalSinceNow:0]];
+            comment.user.profile = [UIImage imageNamed:@"user1.jpg"];
+            [commentsList addObject:comment];
+        }
+        
+        self.storyModel = [[StoryModel alloc] initWithUser:[[User alloc] initWithName:username]
+                                                     Story:story
+                                                 LikeCount:count
+                                                  Comments:commentsList
+                                                CreateTime:[[NSDate alloc] initWithTimeIntervalSinceNow:0]];
     }
     
     return self;
@@ -54,26 +68,27 @@
     [profilePicLayer setCornerRadius:5.0];
     
     // profile name
-    UILabel *profileName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, storyWidth - 100, 20)];
+    UILabel *profileName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 0, 0)];
     profileName.text = self.storyModel.user.name;
     [profileName setFont:[UIFont fontWithName:@"Bariol-Bold" size:18]];
+    [profileName sizeToFit];
     
     // create time
-    UILabel *storyCreateTime = [[UILabel alloc] initWithFrame:CGRectMake(50, 24, storyWidth - 100, 20)];
+    UILabel *storyCreateTime = [[UILabel alloc] initWithFrame:CGRectMake(50, 24, 0, 0)];
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [dateFormatter setLocale:usLocale];
     storyCreateTime.text = [dateFormatter stringFromDate:self.storyModel.createTime];
     [storyCreateTime setFont:[UIFont fontWithName:@"Bariol" size:12]];
-
+    [storyCreateTime sizeToFit];
+    
     // like count
-    UILabel *likeCount = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width - STORY_MARGIN - 50, 10, 50, 20)];
+    UILabel *likeCount = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width - STORY_MARGIN - 50, 10, 0, 0)];
     likeCount.text = [NSString stringWithFormat:@"%d", self.storyModel.likeCount];
     [likeCount setFont:[UIFont fontWithName:@"Bariol" size:18]];
-    
+    [likeCount sizeToFit];
     UIImageView *heart = [[UIImageView alloc] initWithImage:[UIImage imageNamed:HEART_IMAGE]];
     heart.frame = CGRectMake(screenRect.size.width - STORY_MARGIN - 35, 5, 25, 25);
     
@@ -96,30 +111,73 @@
                                      storyTextView.frame.size.width,
                                      labelSize.height);
     
-    
+    UIView *commentsView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                    storyTextView.frame.origin.y + storyTextView.frame.size.height + 10,
+                                                                    storyWidth,
+                                                                    0)];
     if (self.storyModel.comments) {
-        for (Comment *comment in self.storyModel.comments) {
-            UIView *commentItem  = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                            storyTextView.frame.origin.y + storyTextView.frame.size.height + 10,
-                                                                            storyWidth,
-                                                                            0)];
+        CGFloat topY = 0;
+        for (int i = 0; i < [self.storyModel.comments count]; i++) {
+            
+            Comment *comment = (Comment*)[self.storyModel.comments objectAtIndex:i];
+            UIView *commentItem  = [[UIView alloc] initWithFrame:CGRectMake(0, topY, storyWidth, 0)];
             
             UIImageView *commenterProfilePic = [[UIImageView alloc] initWithImage:comment.user.profile];
             commenterProfilePic.frame = CGRectMake(STORY_MARGIN, STORY_MARGIN, 36, 36);
             
             UILabel *commenterName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 0, 0)];
             commenterName.text = comment.user.name;
+            [commenterName setFont:[UIFont fontWithName:@"Bariol-Bold" size:14]];
             [commenterName sizeToFit];
-            [commenterName setFont:[UIFont fontWithName:@"Bariol-Bold" size:16]];
             
-            UILabel *commentTime = [[UILabel alloc] initWithFrame:CGRectMake(55 + commenterName.frame.size.width, 50, 0, 0)];
+            UILabel *commentText = [[UILabel alloc] initWithFrame:CGRectMake(50,
+                                                                             5 + commenterName.frame.size.height,
+                                                                             storyWidth - 55 - commenterName.frame.size.width,
+                                                                             0)];
+            commentText.text = comment.comment;
+            [commentText setFont:[UIFont fontWithName:@"Bariol" size:14]];
+            font = commentText.font;
+            constraintSize = CGSizeMake(commentText.frame.size.width, MAXFLOAT);
+            commentText.adjustsFontSizeToFitWidth = NO;
+            commentText.numberOfLines = 0;
+            CGSize commentTextLabelSize = [commentText.text sizeWithFont:font
+                                                  constrainedToSize:constraintSize
+                                                      lineBreakMode:NSLineBreakByWordWrapping];
+            commentText.frame = CGRectMake(commentText.frame.origin.x,
+                                           commentText.frame.origin.y,
+                                           commentText.frame.size.width,
+                                           commentTextLabelSize.height);
             
+            UILabel *commentTime = [[UILabel alloc] initWithFrame:CGRectMake(50,
+                                                                             5 + commenterName.frame.size.height + commentTextLabelSize.height,
+                                                                             0,
+                                                                             0)];
+            commentTime.text = [dateFormatter stringFromDate:comment.commentTime];
+            [commentTime setFont:[UIFont fontWithName:@"Bariol" size:12]];
+            [commentTime sizeToFit];
+            
+            [commentItem addSubview:commenterProfilePic];
+            [commentItem addSubview:commenterName];
+            [commentItem addSubview:commentText];
+            [commentItem addSubview:commentTime];
+            commentItem.frame = CGRectMake(0,
+                                           commentItem.frame.origin.y,
+                                           storyWidth,
+                                           5 + commentTime.frame.origin.y + commentTime.frame.size.height);
+            [commentsView addSubview:commentItem];
+            topY += commentItem.frame.size.height;
         }
+        CGRect frame = commentsView.frame;
+        frame.size.height = topY;
+        commentsView.frame = frame;
     }
     
-    StoryView *storyView = [[StoryView alloc] initWithFrame:storyInfo.frame StoryInfo:storyInfo StoryView:storyTextView Comments:nil];
-
-    self.view = storyView;
+    StoryView *storyView = [[StoryView alloc] initWithFrame:storyInfo.frame StoryInfo:storyInfo StoryView:storyTextView Comments:commentsView];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:screenRect];
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.contentSize = CGSizeMake(screenRect.size.width, storyView.frame.size.height + storyView.frame.origin.y + 49);
+    self.view = scrollView;
+    [self.view addSubview:storyView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,12 +190,14 @@
              Comments:(NSArray*)comments
             LikeCount:(NSInteger)count
                  User:(User*)user
+         CreateTime:(NSDate*)date
 {
     if (self = [super init]) {
         self.storyModel = [[StoryModel alloc] initWithUser:user
                                                      Story:story
                                                  LikeCount:count
-                                                  Comments:comments];
+                                                  Comments:comments
+                                                CreateTime:date];
 
     }
     
