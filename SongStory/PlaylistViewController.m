@@ -11,18 +11,22 @@
 @interface PlaylistViewController ()
 
 @property (nonatomic,strong) NSMutableArray* songs;
+@property (nonatomic,strong) UITapGestureRecognizer* singleTap;
+
 extern CGFloat const DEFAULT_SONG_VIEW_RADIUS;
 extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 @end
 
 @implementation PlaylistViewController {
     SongViewController *curSongController;
-    int curSongIndex;
 }
 
-@synthesize songs,scrollView,playListTab;
-CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100.0;
-CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
+@synthesize songs,scrollView,playListTab,singleTap;
+
+// Assume the part of next|last album expose p to the current system
+// Then 2 * p * radius + 2 * radius + 2 * speration = UIScreen mainscreen].bounds.width
+CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100;
+CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 13;
 
 
 
@@ -38,7 +42,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
 	// Do any additional setup after loading the view.
     NSLog(@"playlist view load");
     StoryListViewController *storyList = [[StoryListViewController alloc] init];
@@ -46,10 +50,35 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     [self.view addSubview:self.storyList.view];
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"storybackground.png"]];
     scrollView.pagingEnabled = YES;
-//    scrollView.delegate = self;
-//    [self loadSongModels];
-//    [self loadSongs];
-   
+    [self loadSongModels];
+    [self loadSongs];
+    [self addGestureRecognizersToView:self.view];
+}
+
+
+- (void)addGestureRecognizersToView:(UIView *)the_view {
+    
+    the_view.userInteractionEnabled = YES;
+    
+    singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [self.singleTap setDelegate:self];
+    [self.singleTap setNumberOfTapsRequired:1]; // double tap
+    [the_view addGestureRecognizer:self.singleTap];
+    
+}
+
+- (void)singleTap:(id)sender {
+    NSLog(@"Tap",nil);
+    CGRect refFrame = self.storyList.view.frame;
+    CGFloat height = 50;
+    CGRect miniFrame = CGRectMake(refFrame.origin.x, refFrame.origin.y - height, refFrame.size.width, height);
+    SongViewController *curSVC = [self.childViewControllers objectAtIndex:[self getCurrentControllerIndex]];
+    [curSVC minimizeView:miniFrame];
+}
+
+
+- (int) getCurrentControllerIndex {
+    return (int)scrollView.contentOffset.x / scrollView.frame.size.width;
 }
 
 - (void) loadSongModels {
@@ -97,17 +126,18 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
         //TODO Tell user there is no song
         return;
     }
-    
+    scrollView.pagingEnabled = YES;
+    scrollView.clipsToBounds = NO;
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    CGFloat width = DEFAULT_SONG_VIEW_RADIUS * 2 + DEFAULT_SONG_VIEW_SEPERATION;
+    CGFloat delta = ([UIScreen mainScreen].bounds.size.width - width) / 2;
+    scrollView.frame = CGRectMake(self.view.frame.origin.x + delta, self.view.frame.origin.y, width, self.view.frame.size.height - 49);
+    [scrollView setContentSize:CGSizeMake(width * [songs count] ,scrollView.frame.size.height - DEFAULT_SONG_VIEW_RADIUS)];
+    scrollView.layer.borderColor = [UIColor blackColor].CGColor;
+    scrollView.layer.borderWidth =1;
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
-    
-    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
-    [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
-    
-    
-
 }
 
 
@@ -116,49 +146,14 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
+    view.center = CGPointMake(scrollView.bounds.size.width / 2 + index * (scrollView.frame.size.width), scrollView.bounds.size.height / 2 - 40);
     svc.delegate = self;
-    [self addSubControllerAndView:svc ToView:self.view];
+    [self addSubControllerAndView:svc ToView:scrollView];
     
 }
 
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)p_scrollView {
-    
-    int delta = 100;
-    int curIndex = p_scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
-    if (curSongIndex != curIndex) {
-        curSongIndex = curIndex;
-        if (curSongIndex - 1 >= 0) {
-            SongViewController *lastSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex - 1];
-            lastSVC.songview.transform =CGAffineTransformTranslate(lastSVC.songview.transform, delta, 0);
-        }
-        
-        if (curSongIndex + 1 <= [songs count]) {
-            SongViewController *nextSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex + 1];
-            nextSVC.songview.transform =CGAffineTransformTranslate(nextSVC.songview.transform, -delta, 0);
-        }
-    }
-    NSLog(@"%d",curSongIndex);
-}
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)p_scrollView {
-    int delta = 100;
-    int curIndex = p_scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
-    if (curSongIndex != curIndex) {
-        //curSongIndex = curIndex;
-        if (curSongIndex - 1 >= 0) {
-            SongViewController *lastSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex - 1];
-            lastSVC.songview.transform =CGAffineTransformTranslate(lastSVC.songview.transform, -delta, 0);
-        }
-        
-        if (curSongIndex + 1 <= [songs count]) {
-            SongViewController *nextSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex + 1];
-            nextSVC.songview.transform =CGAffineTransformTranslate(nextSVC.songview.transform, +delta, 0);
-        }
-    }
-
-}
 
 
 // SongPlayListDelegate methods
@@ -177,6 +172,6 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     
 }
 - (void) didFinishedPlaying:(id)sender {
-
+    
 }
 @end

@@ -197,14 +197,14 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     [avPlayer stop];
     avPlayer.currentTime = -avPlayer.currentTime;
     [self stopRotate];
-   
+    
 }
 - (void)jumpTo:(CGFloat)percent {
     if (percent < 0) {
         percent = 1 - percent;
     }
     avPlayer.currentTime = - avPlayer.currentTime;
-
+    
     avPlayer.currentTime = avPlayer.duration * percent;
 }
 
@@ -215,11 +215,14 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     }
 }
 
+- (void) minimizeView:(CGRect)frame {
+    
+}
 
 - (void)changeProgress:(CGFloat)delta
 {
     if (songview.progress.percent + delta <= 100 && songview.progress.percent + delta >= 0) {
-    // If we can decrement our percentage, do so, and redraw the view
+        // If we can decrement our percentage, do so, and redraw the view
         int temp = (songview.progress.percent + delta) / 100.0;
         songview.progress.percent = (songview.progress.percent + delta) - temp * 100.0;
         [songview.progress setNeedsDisplay];

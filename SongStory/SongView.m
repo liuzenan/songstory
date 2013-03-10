@@ -53,14 +53,14 @@
 - (void)showProgressBar {
     if (progress.alpha != 1) {
         [UIView animateWithDuration:1
-                          delay:0.0
-                        options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
-                     animations:^{
-                         progress.alpha = 0.8;
-                     }completion:^(BOOL finished){
-                         
-                     }];
-    
+                              delay:0.0
+                            options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
+                         animations:^{
+                             progress.alpha = 0.8;
+                         }completion:^(BOOL finished){
+                             
+                         }];
+        
         [self hideProgressBar];
     }
 }
@@ -108,7 +108,7 @@
         self.layer.borderWidth = 1.5;
         CALayer* shadowLayer = [CALayer layer];
         [self.layer addSublayer:shadowLayer];
-      
+        
         UIView *middle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 2, radius / 2)];
         middle.layer.cornerRadius = radius / 4;
         middle.backgroundColor = [UIColor whiteColor];
