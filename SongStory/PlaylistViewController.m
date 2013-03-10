@@ -17,6 +17,7 @@ extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 
 @implementation PlaylistViewController {
     SongViewController *curSongController;
+    int curSongIndex;
 }
 
 @synthesize songs,scrollView,playListTab;
@@ -120,6 +121,11 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+
+}
+
 
 // SongPlayListDelegate methods
 - (void) didStartedPlaying:(id)sender {
