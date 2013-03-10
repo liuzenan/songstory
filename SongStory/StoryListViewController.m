@@ -47,6 +47,8 @@
     outerScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     outerScroll.contentSize = CGSizeMake(count * screenRect.size.width, outerScroll.frame.size.height - 49);
     outerScroll.pagingEnabled = YES;
+    outerScroll.showsHorizontalScrollIndicator = NO;
+    outerScroll.showsVerticalScrollIndicator = NO;
     
     for (int i = 0; i < count; i++) {
         StoryViewController *story = [stories objectAtIndex:i];

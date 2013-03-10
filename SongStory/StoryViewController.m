@@ -176,6 +176,15 @@
                                            commentItem.frame.origin.y,
                                            storyWidth,
                                            5 + commentTime.frame.origin.y + commentTime.frame.size.height);
+            // Add a topBorder.
+            CALayer *topBorder = [CALayer layer];
+            
+            topBorder.frame = CGRectMake(0.0f, topY, commentItem.frame.size.width, 1.0f);
+            
+            topBorder.backgroundColor = [UIColor colorWithWhite:0.8f
+                                                          alpha:1.0f].CGColor;
+            
+            [commentsView.layer addSublayer:topBorder];
             [commentsView addSubview:commentItem];
             topY += commentItem.frame.size.height;
         }
