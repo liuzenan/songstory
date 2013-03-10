@@ -43,11 +43,12 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     NSLog(@"playlist view load");
     StoryListViewController *storyList = [[StoryListViewController alloc] init];
     self.storyList = storyList;
-     //[self.view addSubview:self.storyList.view];
+    [self.view addSubview:self.storyList.view];
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"storybackground.png"]];
     scrollView.pagingEnabled = YES;
-    scrollView.delegate = self;
-    [self loadSongModels];
-    [self loadSongs];
+//    scrollView.delegate = self;
+//    [self loadSongModels];
+//    [self loadSongs];
    
 }
 
