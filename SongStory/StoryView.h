@@ -13,11 +13,11 @@
 
 @property (nonatomic, strong) UIView *storyInfo;
 @property (nonatomic, strong) UILabel *storyView;
-@property (nonatomic, strong) UITableView *comments;
+@property (nonatomic, strong) UIView *comments;
 
 - (id)initWithFrame:(CGRect)frame
           StoryInfo:(UIView*)storyInfo
           StoryView:(UILabel*)storyView
-           Comments:(UITableView*)comments;
+           Comments:(UIView*)comments;
 
 @end

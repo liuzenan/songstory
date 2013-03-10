@@ -18,5 +18,11 @@
 
 - (id)initWithName:(NSString*)username LikeCount:(NSInteger)count Story:(NSString*)story Comments:(NSArray*)comments;
 
+- (id)initWithStory:(NSString*)story
+           Comments:(NSArray*)comments
+          LikeCount:(NSInteger)count
+               User:(User*)user
+         CreateTime:(NSDate*)date;
+
 
 @end

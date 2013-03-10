@@ -14,6 +14,7 @@
               Story:(NSString*)story
           LikeCount:(NSInteger)count
            Comments:(NSArray*)comments
+         CreateTime:(NSDate*)date
 {
     if (self = [self init]) {
         
@@ -21,7 +22,7 @@
         self.story = story;
         self.likeCount = count;
         self.comments = comments;
-        self.createTime = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        self.createTime = date;
     }
     
     return self;
