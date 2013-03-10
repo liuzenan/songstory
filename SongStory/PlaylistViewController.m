@@ -75,6 +75,12 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     NSLog(@"Tap",nil);
     SongViewController *curSVC = [self.childViewControllers objectAtIndex:[self getCurrentControllerIndex]];
     if (!isCommentMode) {
+        for (SongViewController *svc in self.childViewControllers ) {
+            if (svc != curSVC) {
+                svc.songview.alpha = 0;
+            }
+        }
+        
         [self.view addSubview:self.storyList.view];
         isCommentMode = YES;
         lastCenter = curSVC.view.center;
@@ -86,6 +92,12 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
                                      DEFAULT_MINIMIZED_VIEW_HEIGHT /2 + 50, curSVC.view.frame.origin.y - 50);
         [curSVC togglePlayView:center :transform];
     } else {
+        for (SongViewController *svc in self.childViewControllers ) {
+            if (svc != curSVC) {
+                svc.songview.alpha = 1;
+            }
+        }
+
         isCommentMode = NO;
         [self.storyList.view removeFromSuperview];
         [curSVC togglePlayView:lastCenter :lastTransform];
@@ -182,7 +194,6 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     [self addSubControllerAndView:svc ToView:scrollView];
     
 }
-
 
 
 
