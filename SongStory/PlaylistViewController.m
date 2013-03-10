@@ -41,10 +41,11 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 
 	// Do any additional setup after loading the view.
     NSLog(@"playlist view load");
-    scrollView.pagingEnabled = YES;
     StoryListViewController *storyList = [[StoryListViewController alloc] init];
     self.storyList = storyList;
      //[self.view addSubview:self.storyList.view];
+    scrollView.pagingEnabled = YES;
+    scrollView.delegate = self;
     [self loadSongModels];
     [self loadSongs];
    
@@ -99,10 +100,13 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
-
+    
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
     [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
+    
+    
+
 }
 
 
@@ -118,11 +122,40 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 }
 
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)p_scrollView {
     
+    int delta = 100;
+    int curIndex = p_scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
+    if (curSongIndex != curIndex) {
+        curSongIndex = curIndex;
+        if (curSongIndex - 1 >= 0) {
+            SongViewController *lastSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex - 1];
+            lastSVC.songview.transform =CGAffineTransformTranslate(lastSVC.songview.transform, delta, 0);
+        }
+        
+        if (curSongIndex + 1 <= [songs count]) {
+            SongViewController *nextSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex + 1];
+            nextSVC.songview.transform =CGAffineTransformTranslate(nextSVC.songview.transform, -delta, 0);
+        }
+    }
+    NSLog(@"%d",curSongIndex);
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)p_scrollView {
+    int delta = 100;
+    int curIndex = p_scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
+    if (curSongIndex != curIndex) {
+        //curSongIndex = curIndex;
+        if (curSongIndex - 1 >= 0) {
+            SongViewController *lastSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex - 1];
+            lastSVC.songview.transform =CGAffineTransformTranslate(lastSVC.songview.transform, -delta, 0);
+        }
+        
+        if (curSongIndex + 1 <= [songs count]) {
+            SongViewController *nextSVC = (SongViewController*)[self.childViewControllers objectAtIndex:curSongIndex + 1];
+            nextSVC.songview.transform =CGAffineTransformTranslate(nextSVC.songview.transform, +delta, 0);
+        }
+    }
 
 }
 
