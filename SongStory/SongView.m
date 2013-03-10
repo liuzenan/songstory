@@ -13,7 +13,7 @@
 @property (nonatomic) CGFloat radius;
 @end
 @implementation SongView
-@synthesize controlImage,progress,radius;
+@synthesize controlImage,progress,radius,middle,circle;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -109,7 +109,7 @@
         CALayer* shadowLayer = [CALayer layer];
         [self.layer addSublayer:shadowLayer];
         
-        UIView *middle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 2, radius / 2)];
+        middle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 2, radius / 2)];
         middle.layer.cornerRadius = radius / 4;
         middle.backgroundColor = [UIColor whiteColor];
         middle.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -117,7 +117,7 @@
         middle.alpha = 1;
         middle.center = self.center;
         
-        UIView *circle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 1.5, radius / 1.5)];
+        circle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 1.5, radius / 1.5)];
         circle.layer.cornerRadius = radius / 3;
         circle.layer.borderColor = [UIColor lightGrayColor].CGColor;
         circle.layer.borderWidth = 3;

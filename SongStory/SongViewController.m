@@ -215,8 +215,40 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     }
 }
 
-- (void) minimizeView:(CGRect)frame {
+
+- (void) togglePlayView:(CGPoint)center :(CGAffineTransform)transform {
     
+    if (songview.userInteractionEnabled == YES) {
+        songview.userInteractionEnabled = NO;
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             songview.circle.alpha = 0;
+                             songview.middle.alpha = 0;
+                             songview.controlImage.alpha = 0;
+                             songview.progress.alpha = 0;
+                             songview.transform = transform;
+                             songview.center = center;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"Done!");
+                         }];
+    } else {
+        songview.userInteractionEnabled = YES;
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             songview.circle.alpha = 1;
+                             songview.middle.alpha = 1;
+                             songview.controlImage.alpha = 1;
+                             songview.progress.alpha = 1;
+                             songview.transform = transform;
+                             songview.center = center;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"Done!");
+                         }];
+
+    
+    }
 }
 
 - (void)changeProgress:(CGFloat)delta

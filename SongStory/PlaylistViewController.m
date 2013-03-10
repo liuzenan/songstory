@@ -15,10 +15,14 @@
 
 extern CGFloat const DEFAULT_SONG_VIEW_RADIUS;
 extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
+extern CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT;
 @end
 
 @implementation PlaylistViewController {
     SongViewController *curSongController;
+    BOOL isCommentMode;
+    CGPoint lastCenter;
+    CGAffineTransform lastTransform;
 }
 
 @synthesize songs,scrollView,playListTab,singleTap;
@@ -27,6 +31,7 @@ extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 // Then 2 * p * radius + 2 * radius + 2 * speration = UIScreen mainscreen].bounds.width
 CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100;
 CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 13;
+CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
 
 
 
@@ -47,7 +52,6 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 13;
     NSLog(@"playlist view load");
     StoryListViewController *storyList = [[StoryListViewController alloc] init];
     self.storyList = storyList;
-    [self.view addSubview:self.storyList.view];
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"storybackground.png"]];
     scrollView.pagingEnabled = YES;
     [self loadSongModels];
@@ -69,13 +73,28 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 13;
 
 - (void)singleTap:(id)sender {
     NSLog(@"Tap",nil);
-    CGRect refFrame = self.storyList.view.frame;
-    CGFloat height = 50;
-    CGRect miniFrame = CGRectMake(refFrame.origin.x, refFrame.origin.y - height, refFrame.size.width, height);
     SongViewController *curSVC = [self.childViewControllers objectAtIndex:[self getCurrentControllerIndex]];
-    [curSVC minimizeView:miniFrame];
+    if (!isCommentMode) {
+        [self.view addSubview:self.storyList.view];
+        isCommentMode = YES;
+        lastCenter = curSVC.view.center;
+        lastTransform = curSVC.view.transform;
+        CGFloat scale = DEFAULT_MINIMIZED_VIEW_HEIGHT / curSVC.songview.frame.size.height;
+        CGAffineTransform transform = CGAffineTransformScale(curSVC.songview.transform, scale,scale);
+        CGPoint center = CGPointMake(curSVC.view.frame.origin.x +
+                                     curSVC.view.frame.size.width -
+                                     DEFAULT_MINIMIZED_VIEW_HEIGHT /2 + 50, curSVC.view.frame.origin.y - 50);
+        [curSVC togglePlayView:center :transform];
+    } else {
+        isCommentMode = NO;
+        [self.storyList.view removeFromSuperview];
+        [curSVC togglePlayView:lastCenter :lastTransform];
+    }
 }
 
+- (void)toggleComment {
+
+}
 
 - (int) getCurrentControllerIndex {
     return (int)scrollView.contentOffset.x / scrollView.frame.size.width;

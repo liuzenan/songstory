@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITabBarItem *playListTab;
 @property (nonatomic, strong) StoryListViewController *storyList;
+
 @end
