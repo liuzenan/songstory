@@ -72,6 +72,7 @@
     profileName.text = self.storyModel.user.name;
     [profileName setFont:[UIFont fontWithName:@"Bariol-Bold" size:18]];
     [profileName sizeToFit];
+    profileName.backgroundColor = [UIColor clearColor];
     
     // create time
     UILabel *storyCreateTime = [[UILabel alloc] initWithFrame:CGRectMake(50, 24, 0, 0)];
@@ -83,14 +84,18 @@
     storyCreateTime.text = [dateFormatter stringFromDate:self.storyModel.createTime];
     [storyCreateTime setFont:[UIFont fontWithName:@"Bariol" size:12]];
     [storyCreateTime sizeToFit];
+    storyCreateTime.backgroundColor = [UIColor clearColor];
     
     // like count
     UILabel *likeCount = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width - STORY_MARGIN - 50, 10, 0, 0)];
     likeCount.text = [NSString stringWithFormat:@"%d", self.storyModel.likeCount];
     [likeCount setFont:[UIFont fontWithName:@"Bariol" size:18]];
     [likeCount sizeToFit];
+    likeCount.backgroundColor = [UIColor clearColor];
+    
     UIImageView *heart = [[UIImageView alloc] initWithImage:[UIImage imageNamed:HEART_IMAGE]];
     heart.frame = CGRectMake(screenRect.size.width - STORY_MARGIN - 35, 5, 25, 25);
+    heart.backgroundColor = [UIColor clearColor];
     
     [storyInfo addSubview:profilePic];
     [storyInfo addSubview:profileName];
@@ -110,6 +115,7 @@
                                      storyTextView.frame.origin.y,
                                      storyTextView.frame.size.width,
                                      labelSize.height);
+    storyTextView.backgroundColor = [UIColor clearColor];
     
     UIView *commentsView = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                     storyTextView.frame.origin.y + storyTextView.frame.size.height + 10,
@@ -124,15 +130,19 @@
             
             UIImageView *commenterProfilePic = [[UIImageView alloc] initWithImage:comment.user.profile];
             commenterProfilePic.frame = CGRectMake(STORY_MARGIN, STORY_MARGIN, 36, 36);
+            profilePicLayer = [commenterProfilePic layer];
+            [profilePicLayer setMasksToBounds:YES];
+            [profilePicLayer setCornerRadius:5.0];
             
             UILabel *commenterName = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, 0, 0)];
             commenterName.text = comment.user.name;
             [commenterName setFont:[UIFont fontWithName:@"Bariol-Bold" size:14]];
             [commenterName sizeToFit];
+            commenterName.backgroundColor = [UIColor clearColor];
             
             UILabel *commentText = [[UILabel alloc] initWithFrame:CGRectMake(50,
                                                                              5 + commenterName.frame.size.height,
-                                                                             storyWidth - 55 - commenterName.frame.size.width,
+                                                                             storyWidth - 55,
                                                                              0)];
             commentText.text = comment.comment;
             [commentText setFont:[UIFont fontWithName:@"Bariol" size:14]];
@@ -147,6 +157,7 @@
                                            commentText.frame.origin.y,
                                            commentText.frame.size.width,
                                            commentTextLabelSize.height);
+            commentText.backgroundColor = [UIColor clearColor];
             
             UILabel *commentTime = [[UILabel alloc] initWithFrame:CGRectMake(50,
                                                                              5 + commenterName.frame.size.height + commentTextLabelSize.height,
@@ -155,6 +166,7 @@
             commentTime.text = [dateFormatter stringFromDate:comment.commentTime];
             [commentTime setFont:[UIFont fontWithName:@"Bariol" size:12]];
             [commentTime sizeToFit];
+            commentTime.backgroundColor = [UIColor clearColor];
             
             [commentItem addSubview:commenterProfilePic];
             [commentItem addSubview:commenterName];
