@@ -41,9 +41,10 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    scrollView.pagingEnabled = YES;
     [self loadSongModels];
     [self loadSongs];
-    [self addGestureRecognizersToView:scrollView];
+    //[self addGestureRecognizersToView:scrollView];
 }
 
 - (void) loadSongModels {
@@ -113,13 +114,15 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
-    
-   // CGFloat scrollViewWidth = [songs count] * (2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION) + DEFAULT_IPHONE4_WIDTH - 2 *DEFAULT_SONG_VIEW_RADIUS - 10;
-   // [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 500)];
+
+    //CGRect screenFrame = [UIScreen mainScreen].bounds;
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
+    [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
 }
 - (void) nextSong {
      NSLog(@"Next",nil);
-     
+     /*
     if (curSong + 1 < [songs count]) {
         [curSongController isGoingToChange];
         for (SongViewController *svc in [self childViewControllers]) {
@@ -133,11 +136,12 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
                                  
             }];
         }
-    }
+    }*/
 }
 
 - (void) lastSong {
     NSLog(@"Last",nil);
+    /*
     if (curSong - 1  >= 0) {
         [curSongController isGoingToChange];
         for (SongViewController *svc in [self childViewControllers]) {
@@ -152,7 +156,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
                              }];
         }
 
-    }
+    }*/
 }
 
 /*
@@ -172,7 +176,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-    view.center = CGPointMake(self.view.center.x + index * (DEFAULT_SONG_VIEW_RADIUS * 2 + DEFAULT_SONG_VIEW_SEPERATION), self.view.center.y - DEFAULT_SONG_VIEW_RADIUS);
+    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS);
     [self addSubControllerAndView:svc ToView:self.view];
     curSong = index;
     curSongController = svc;
