@@ -168,14 +168,11 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
-<<<<<<< HEAD
-    
+
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
     [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
-    
-=======
->>>>>>> 487a3488f9d49583425f7f01fbe7a88190ba210f
+
 }
 
 
@@ -184,12 +181,9 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-<<<<<<< HEAD
     view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width,
                               self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
-=======
-    view.center = CGPointMake(scrollView.bounds.size.width / 2 + index * (scrollView.frame.size.width), scrollView.bounds.size.height / 2 - 40);
->>>>>>> 487a3488f9d49583425f7f01fbe7a88190ba210f
+
     svc.delegate = self;
     [self addSubControllerAndView:svc ToView:scrollView];
     
