@@ -27,6 +27,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSLog(@"playlist view load");
+    StoryListViewController *storyList = [[StoryListViewController alloc] init];
+    self.storyList = storyList;
+    [self.view addSubview:self.storyList.view];
 }
 
 - (void)didReceiveMemoryWarning

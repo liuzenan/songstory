@@ -26,6 +26,16 @@
 		E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEEF16EB20DC000F2BFE /* StoryView.m */; };
 		E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEF216EB20E8000F2BFE /* StoryModel.m */; };
 		E417DEFC16EB2667000F2BFE /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */; };
+		E451149216EB29550045411C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E451149116EB29550045411C /* User.m */; };
+		E451149616EB2C720045411C /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = E451149516EB2C720045411C /* Comment.m */; };
+		E451149E16EB70C30045411C /* user1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E451149D16EB70C20045411C /* user1.jpg */; };
+		E45114A016EB73D50045411C /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = E451149F16EB73D50045411C /* heart.png */; };
+		E45114A716EBB71F0045411C /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114A216EBB71F0045411C /* Merriweather-Bold.ttf */; };
+		E45114A816EBB71F0045411C /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114A316EBB71F0045411C /* Merriweather-Regular.ttf */; };
+		E45114AF16EBBA0F0045411C /* bariol_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AC16EBBA0F0045411C /* bariol_bold.ttf */; };
+		E45114B016EBBA0F0045411C /* bariol_regular_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AD16EBBA0F0045411C /* bariol_regular_italic.ttf */; };
+		E45114B116EBBA0F0045411C /* bariol_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AE16EBBA0F0045411C /* bariol_regular.ttf */; };
+		E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45114B316EBCACD0045411C /* StoryListViewController.m */; };
 		E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD116EB1E9D00F82D74 /* SongViewController.m */; };
 		E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD416EB1EAE00F82D74 /* SongModel.m */; };
 		E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD716EB1EBB00F82D74 /* SongView.m */; };
@@ -56,11 +66,25 @@
 		E415EEA716EAFAB500437179 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		E415EEA916EAFAB500437179 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		E417DEEE16EB20DC000F2BFE /* StoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryView.h; sourceTree = "<group>"; };
-		E417DEEF16EB20DC000F2BFE /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; };
+		E417DEEF16EB20DC000F2BFE /* StoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E417DEF116EB20E8000F2BFE /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
 		E417DEF216EB20E8000F2BFE /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
 		E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
+		E451149016EB29550045411C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		E451149116EB29550045411C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		E451149416EB2C720045411C /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		E451149516EB2C720045411C /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		E451149A16EB69040045411C /* StoryViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewConstants.h; sourceTree = "<group>"; };
+		E451149D16EB70C20045411C /* user1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = user1.jpg; path = Users/user1.jpg; sourceTree = "<group>"; };
+		E451149F16EB73D50045411C /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		E45114A216EBB71F0045411C /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Merriweather-Bold.ttf"; path = "Fonts/Merriweather-Bold.ttf"; sourceTree = "<group>"; };
+		E45114A316EBB71F0045411C /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Merriweather-Regular.ttf"; path = "Fonts/Merriweather-Regular.ttf"; sourceTree = "<group>"; };
+		E45114AC16EBBA0F0045411C /* bariol_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bariol_bold.ttf; path = Fonts/bariol_bold.ttf; sourceTree = "<group>"; };
+		E45114AD16EBBA0F0045411C /* bariol_regular_italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bariol_regular_italic.ttf; path = Fonts/bariol_regular_italic.ttf; sourceTree = "<group>"; };
+		E45114AE16EBBA0F0045411C /* bariol_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bariol_regular.ttf; path = Fonts/bariol_regular.ttf; sourceTree = "<group>"; };
+		E45114B216EBCACD0045411C /* StoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryListViewController.h; sourceTree = "<group>"; };
+		E45114B316EBCACD0045411C /* StoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryListViewController.m; sourceTree = "<group>"; };
 		E4786AD016EB1E9D00F82D74 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
 		E4786AD116EB1E9D00F82D74 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
 		E4786AD316EB1EAE00F82D74 /* SongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongModel.h; sourceTree = "<group>"; };
@@ -115,6 +139,9 @@
 		E415EE8816EAFAB500437179 /* SongStory */ = {
 			isa = PBXGroup;
 			children = (
+				E45114A116EBB7140045411C /* Fonts */,
+				E451149F16EB73D50045411C /* heart.png */,
+				E451149316EB29590045411C /* User */,
 				E4786AD916EB1EE600F82D74 /* Story */,
 				E4786ACF16EB1E8800F82D74 /* Song */,
 				E415EE9116EAFAB500437179 /* AppDelegate.h */,
@@ -128,9 +155,9 @@
 				E415EEA516EAFAB500437179 /* SecondViewController.m */,
 				E415EEA716EAFAB500437179 /* second.png */,
 				E415EEA916EAFAB500437179 /* second@2x.png */,
-				E415EE8916EAFAB500437179 /* Supporting Files */,
 				E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */,
 				E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */,
+				E415EE8916EAFAB500437179 /* Supporting Files */,
 			);
 			path = SongStory;
 			sourceTree = "<group>";
@@ -149,6 +176,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E451149316EB29590045411C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E451149016EB29550045411C /* User.h */,
+				E451149116EB29550045411C /* User.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		E45114A116EBB7140045411C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E45114AC16EBBA0F0045411C /* bariol_bold.ttf */,
+				E45114AD16EBBA0F0045411C /* bariol_regular_italic.ttf */,
+				E45114AE16EBBA0F0045411C /* bariol_regular.ttf */,
+				E45114A216EBB71F0045411C /* Merriweather-Bold.ttf */,
+				E45114A316EBB71F0045411C /* Merriweather-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		E4786ACF16EB1E8800F82D74 /* Song */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,12 +213,18 @@
 		E4786AD916EB1EE600F82D74 /* Story */ = {
 			isa = PBXGroup;
 			children = (
+				E451149D16EB70C20045411C /* user1.jpg */,
 				E4786ADA16EB1F8000F82D74 /* StoryViewController.h */,
 				E4786ADB16EB1F8000F82D74 /* StoryViewController.m */,
 				E417DEEE16EB20DC000F2BFE /* StoryView.h */,
 				E417DEEF16EB20DC000F2BFE /* StoryView.m */,
 				E417DEF116EB20E8000F2BFE /* StoryModel.h */,
 				E417DEF216EB20E8000F2BFE /* StoryModel.m */,
+				E451149416EB2C720045411C /* Comment.h */,
+				E451149516EB2C720045411C /* Comment.m */,
+				E451149A16EB69040045411C /* StoryViewConstants.h */,
+				E45114B216EBCACD0045411C /* StoryListViewController.h */,
+				E45114B316EBCACD0045411C /* StoryListViewController.m */,
 			);
 			name = Story;
 			sourceTree = "<group>";
@@ -235,6 +289,13 @@
 				E415EEA316EAFAB500437179 /* first@2x.png in Resources */,
 				E415EEA816EAFAB500437179 /* second.png in Resources */,
 				E415EEAA16EAFAB500437179 /* second@2x.png in Resources */,
+				E451149E16EB70C30045411C /* user1.jpg in Resources */,
+				E45114A016EB73D50045411C /* heart.png in Resources */,
+				E45114A716EBB71F0045411C /* Merriweather-Bold.ttf in Resources */,
+				E45114A816EBB71F0045411C /* Merriweather-Regular.ttf in Resources */,
+				E45114AF16EBBA0F0045411C /* bariol_bold.ttf in Resources */,
+				E45114B016EBBA0F0045411C /* bariol_regular_italic.ttf in Resources */,
+				E45114B116EBBA0F0045411C /* bariol_regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +317,9 @@
 				E417DEF016EB20DC000F2BFE /* StoryView.m in Sources */,
 				E417DEF316EB20E8000F2BFE /* StoryModel.m in Sources */,
 				E417DEFC16EB2667000F2BFE /* PlaylistViewController.m in Sources */,
+				E451149216EB29550045411C /* User.m in Sources */,
+				E451149616EB2C720045411C /* Comment.m in Sources */,
+				E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

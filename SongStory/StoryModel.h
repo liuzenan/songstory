@@ -7,7 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface StoryModel : NSObject
+
+@property (nonatomic, assign) NSString *story;
+@property (nonatomic, strong) NSDate *createTime;
+@property (nonatomic, assign) NSInteger likeCount;
+@property (nonatomic, strong) NSArray *comments;
+@property (nonatomic, strong) User *user;
+
+
+- (id) initWithUser:(User*)user
+              Story:(NSString*)story
+          LikeCount:(NSInteger)count
+           Comments:(NSArray*)comments;
 
 @end

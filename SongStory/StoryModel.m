@@ -10,4 +10,21 @@
 
 @implementation StoryModel
 
+- (id) initWithUser:(User*)user
+              Story:(NSString*)story
+          LikeCount:(NSInteger)count
+           Comments:(NSArray*)comments
+{
+    if (self = [self init]) {
+        
+        self.user = user;
+        self.story = story;
+        self.likeCount = count;
+        self.comments = comments;
+        self.createTime = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    }
+    
+    return self;
+}
+
 @end

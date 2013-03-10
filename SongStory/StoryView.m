@@ -28,4 +28,28 @@
 }
 */
 
+- (id)initWithFrame:(CGRect)frame
+          StoryInfo:(UIView*)storyInfo
+          StoryView:(UILabel*)storyView
+           Comments:(UITableView*)comments
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.storyInfo = storyInfo;
+        self.storyView = storyView;
+        self.comments = comments;
+        
+        [self addSubview:storyInfo];
+        [self addSubview:storyView];
+        [self addSubview:comments];
+        
+        self.frame = CGRectMake(STORY_MARGIN,
+                                50,
+                                self.storyInfo.frame.size.width,
+                                self.storyInfo.frame.size.height + self.storyView.frame.size.height);
+    }
+    
+    return self;
+}
+
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoryListViewController.h"
 
 @interface PlaylistViewController : UIViewController
+
+@property (nonatomic, strong) StoryListViewController *storyList;
 
 @end

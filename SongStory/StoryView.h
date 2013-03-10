@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoryViewConstants.h"
 
 @interface StoryView : UIView
+
+@property (nonatomic, strong) UIView *storyInfo;
+@property (nonatomic, strong) UILabel *storyView;
+@property (nonatomic, strong) UITableView *comments;
+
+- (id)initWithFrame:(CGRect)frame
+          StoryInfo:(UIView*)storyInfo
+          StoryView:(UILabel*)storyView
+           Comments:(UITableView*)comments;
 
 @end
