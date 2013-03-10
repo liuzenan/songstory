@@ -25,4 +25,5 @@
 - (void) play;
 - (void) jumpTo:(CGFloat)percent;
 - (void) reinit;
+- (void) togglePlayView:(CGPoint)center :(CGAffineTransform)transform;
 @end

@@ -197,14 +197,14 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     [avPlayer stop];
     avPlayer.currentTime = -avPlayer.currentTime;
     [self stopRotate];
-   
+    
 }
 - (void)jumpTo:(CGFloat)percent {
     if (percent < 0) {
         percent = 1 - percent;
     }
     avPlayer.currentTime = - avPlayer.currentTime;
-
+    
     avPlayer.currentTime = avPlayer.duration * percent;
 }
 
@@ -216,10 +216,45 @@ CGFloat const UPDATE_INTERVAL = 0.01;
 }
 
 
+- (void) togglePlayView:(CGPoint)center :(CGAffineTransform)transform {
+    
+    if (songview.userInteractionEnabled == YES) {
+        songview.userInteractionEnabled = NO;
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             songview.circle.alpha = 0;
+                             songview.middle.alpha = 0;
+                             songview.controlImage.alpha = 0;
+                             songview.progress.alpha = 0;
+                             songview.transform = transform;
+                             songview.center = center;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"Done!");
+                         }];
+    } else {
+        songview.userInteractionEnabled = YES;
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             songview.circle.alpha = 1;
+                             songview.middle.alpha = 1;
+                             songview.controlImage.alpha = 1;
+                             songview.progress.alpha = 1;
+                             songview.transform = transform;
+                             songview.center = center;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"Done!");
+                         }];
+
+    
+    }
+}
+
 - (void)changeProgress:(CGFloat)delta
 {
     if (songview.progress.percent + delta <= 100 && songview.progress.percent + delta >= 0) {
-    // If we can decrement our percentage, do so, and redraw the view
+        // If we can decrement our percentage, do so, and redraw the view
         int temp = (songview.progress.percent + delta) / 100.0;
         songview.progress.percent = (songview.progress.percent + delta) - temp * 100.0;
         [songview.progress setNeedsDisplay];

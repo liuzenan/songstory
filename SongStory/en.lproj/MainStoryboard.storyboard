@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+>>>>>>> 487a3488f9d49583425f7f01fbe7a88190ba210f
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Explore View Controller - Explore-->
@@ -43,15 +47,21 @@
         <scene sceneID="0bw-yp-bBG">
             <objects>
                 <viewController storyboardIdentifier="playlist" title="Playlist" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7n2-RL-xQJ" customClass="PlaylistViewController" sceneMemberID="viewController">
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="C3r-OU-LNu">
+                    <view key="view" contentMode="scaleToFill" id="WZz-K9-3UV">
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </scrollView>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" id="B9L-c7-oSk">
+                                <rect key="frame" x="14" y="20" width="293" height="457"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <tabBarItem key="tabBarItem" title="Playlist" image="playlist.png" id="gty-PE-goc"/>
                     <connections>
                         <outlet property="playListTab" destination="gty-PE-goc" id="Xfj-7C-ac6"/>
-                        <outlet property="scrollView" destination="C3r-OU-LNu" id="X4C-Rv-GlD"/>
+                        <outlet property="scrollView" destination="B9L-c7-oSk" id="pxP-xe-3bL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSa-Mt-881" userLabel="First Responder" sceneMemberID="firstResponder"/>

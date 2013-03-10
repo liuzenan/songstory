@@ -11,8 +11,9 @@
 #import "SongViewController.h"
 #import "SongPlayListDelegate.h"
 
-@interface PlaylistViewController : UIViewController <SongPlayListDelegate,UIScrollViewDelegate>
+@interface PlaylistViewController : UIViewController <SongPlayListDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITabBarItem *playListTab;
 @property (nonatomic, strong) StoryListViewController *storyList;
+
 @end

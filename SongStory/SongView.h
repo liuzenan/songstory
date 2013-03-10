@@ -14,6 +14,8 @@
 
 @property (nonatomic,strong) UIImageView *controlImage;
 @property (nonatomic,strong) ProgressView *progress;
+@property (nonatomic,strong) UIView *middle;
+@property (nonatomic,strong) UIView *circle;
 
 - (void)hideProgressBar;
 - (void)showProgressBar;
