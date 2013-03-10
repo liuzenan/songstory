@@ -14,6 +14,7 @@
 {
     if (self = [self init]) {
         self.name = name;
+        self.profile = [UIImage imageNamed:@"user1.jpg"];
     }
     
     return self;
