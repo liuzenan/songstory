@@ -18,6 +18,7 @@ extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 @implementation PlaylistViewController {
     SongViewController *curSongController;
 }
+
 @synthesize songs,scrollView,playListTab;
 CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100.0;
 CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
@@ -40,11 +41,12 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 	// Do any additional setup after loading the view.
     NSLog(@"playlist view load");
     scrollView.pagingEnabled = YES;
-    [self loadSongModels];
-    [self loadSongs];
     StoryListViewController *storyList = [[StoryListViewController alloc] init];
     self.storyList = storyList;
-    [self.view addSubview:self.storyList.view];
+     //[self.view addSubview:self.storyList.view];
+    [self loadSongModels];
+    [self loadSongs];
+   
 }
 
 - (void) loadSongModels {
@@ -86,25 +88,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     [view addSubview:subcontroller.view];
     [subcontroller didMoveToParentViewController:self];
 }
-/*
-- (void)addGestureRecognizersToView:(UIView *)the_view {
-    
-    the_view.userInteractionEnabled = YES;
-    
-    self.rightSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
-    [self.rightSwipeGesture setNumberOfTouchesRequired:1];
-    [self.rightSwipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.rightSwipeGesture setDelegate:self];
-    [the_view addGestureRecognizer:self.rightSwipeGesture];
-    
-    self.leftSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
-    [self.leftSwipeGesture setNumberOfTouchesRequired:1];
-    [self.leftSwipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.leftSwipeGesture setDelegate:self];
-    [the_view addGestureRecognizer:self.leftSwipeGesture];
 
-}
-*/
 - (void) loadSongs {
     if ([songs count] == 0) {
         //TODO Tell user there is no song
@@ -126,14 +110,16 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS);
+    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
     svc.delegate = self;
     [self addSubControllerAndView:svc ToView:self.view];
     
 }
 
 
-
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+}
 
 // SongPlayListDelegate methods
 - (void) didStartedPlaying:(id)sender {
@@ -144,6 +130,9 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
         }
     }
 }
+
+
+
 - (void) didPausedPlaying:(id)sender {
     
 }
