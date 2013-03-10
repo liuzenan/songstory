@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "StoryView.h"
 #import "StoryModel.h"
+#import "Comment.h"
 
 @interface StoryViewController : UIViewController
+
+@property (nonatomic, strong) StoryModel *storyModel;
+
+- (id)initWithName:(NSString*)username LikeCount:(NSInteger)count Story:(NSString*)story Comments:(NSArray*)comments;
+
 
 @end

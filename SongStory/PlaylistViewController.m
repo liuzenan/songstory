@@ -13,7 +13,6 @@
 @property (nonatomic,strong) NSMutableArray* songs;
 extern CGFloat const DEFAULT_SONG_VIEW_RADIUS;
 extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
-
 @end
 
 @implementation PlaylistViewController {
@@ -37,10 +36,15 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+	// Do any additional setup after loading the view.
+    NSLog(@"playlist view load");
     scrollView.pagingEnabled = YES;
     [self loadSongModels];
     [self loadSongs];
-    //[self addGestureRecognizersToView:scrollView];
+    StoryListViewController *storyList = [[StoryListViewController alloc] init];
+    self.storyList = storyList;
+    [self.view addSubview:self.storyList.view];
 }
 
 - (void) loadSongModels {
