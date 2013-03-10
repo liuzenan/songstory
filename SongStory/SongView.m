@@ -86,7 +86,7 @@
         
         controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_STOP_IMAGE]];
         CGFloat scale = self.bounds.size.height / controlImage.bounds.size.height ;
-        controlImage.transform = CGAffineTransformScale(controlImage.transform, scale / 10, scale / 10);
+        controlImage.transform = CGAffineTransformScale(controlImage.transform, scale / 8, scale / 8);
         controlImage.center = self.center;
         [self.superview addSubview:controlImage];
     }

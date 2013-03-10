@@ -152,7 +152,7 @@ CGFloat const UPDATE_INTERVAL = 0.01;
 }
 
 - (void) rotateView {
-    songview.transform = CGAffineTransformRotate(songview.transform, M_PI / 800);
+    songview.transform = CGAffineTransformRotate(songview.transform, M_PI / 1000);
 }
 
 - (void) singleTap:(UIRotationGestureRecognizer *)gesture {

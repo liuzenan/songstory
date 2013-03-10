@@ -16,6 +16,7 @@
 
 @implementation PlaylistViewController {
     int curSong;
+    CGPoint panStartPoint;
 }
 @synthesize songs;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,7 +85,10 @@
 }
 
 - (void) nextSong {
-    
+    if (curSong + 1 < [songs count]) {
+        NSLog(@"Next",nil);
+        //[self loadSongAtIndex:curSong + 1];
+    }
 }
 
 - (void) loadSongAtIndex:(CGFloat)index {
@@ -100,12 +104,33 @@
     }
 }
 
-- (void) lastSong {
+- (void) stopCurSong {
+    
+}
 
+- (void) lastSong {
+    NSLog(@"Last",nil);
+    if (curSong - 1  >= 0) {
+        //[self loadSongAtIndex:curSong - 1];
+    }
 }
 
 - (void) pan:(UIPanGestureRecognizer *)gesture {
-    NSLog(@"Pan",nil);
-    CGPoint velocity = [gesture velocityInView:self.view];
+    //NSLog(@"Pan",nil);
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        panStartPoint = [gesture locationInView:self.view];
+    }
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint translate = [gesture translationInView:self.view];
+        CGPoint curPoint = [gesture locationInView:self.view];
+        CGFloat dist_x = (panStartPoint.x - curPoint.x);
+        CGFloat dist_y = (panStartPoint.y - curPoint.y);
+        CGFloat dist = sqrt(dist_x * dist_x + dist_y * dist_y);
+        if (dist > self.view.frame.size.width / 4 && translate.x > 0) {
+            [self nextSong];
+        } else if (dist > self.view.frame.size.width / 4 && translate.x < 0) {
+            [self lastSong];
+        }
+    }
 }
 @end
