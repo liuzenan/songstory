@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SongViewController : UIViewController
-
+#import <UIKit/UIKit.h>
+#import <CoreAudio/CoreAudioTypes.h>
+#import <AVFoundation/AVAudioPlayer.h>
+#import "SongPlayListDelegate.h"
+#import "SongView.h"
+#import "SongModel.h"
+#import "Constant.h"
+@interface SongViewController : UIViewController  <UIGestureRecognizerDelegate,AVAudioPlayerDelegate>
+@property (nonatomic,weak) id<SongPlayListDelegate> delegate;
+@property (nonatomic,weak) SongView* songview;
+@property (nonatomic,strong) SongModel* songmodel;
+@property (nonatomic,strong) AVAudioPlayer * avPlayer;
++ (SongViewController*) songViewControllerWithViewAndModel:(SongView*)songview Model:(SongModel*)songmodel;
+- (void) stop;
+- (void) pause;
+- (void) play;
+- (void) jumpTo:(CGFloat)percent;
+- (void) reinit;
 @end

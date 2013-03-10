@@ -130,6 +130,10 @@
             [commenterName setFont:[UIFont fontWithName:@"Bariol-Bold" size:14]];
             [commenterName sizeToFit];
             
+<<<<<<< HEAD
+=======
+            UILabel *commentTime = [[UILabel alloc] initWithFrame:CGRectMake(55 + commenterName.frame.size.width, 50, 0, 0)];
+>>>>>>> 4673d44b2b742c78db5c257a0e773f55537e098a
             
             UILabel *commentText = [[UILabel alloc] initWithFrame:CGRectMake(50,
                                                                              5 + commenterName.frame.size.height,

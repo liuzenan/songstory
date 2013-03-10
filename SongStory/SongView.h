@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/CoreAnimation.h>
+#import "Constant.h"
+#import "ProgressView.h"
+@interface SongView : UIImageView
 
-@interface SongView : UIView
+@property (nonatomic,strong) UIImageView *controlImage;
+@property (nonatomic,strong) ProgressView *progress;
+
+- (void)hideProgressBar;
+- (void)showProgressBar;
++ (SongView*) songViewWithImageAndRadius:(UIImage*)image :(CGFloat)radius;
+- (void)addStateImage:(PlayState)state;
+- (void)removeStateImage;
 
 @end
