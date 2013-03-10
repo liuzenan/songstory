@@ -18,7 +18,7 @@
     int curSong;
     CGPoint panStartPoint;
 }
-@synthesize songs;
+@synthesize songs,scrollView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,7 +32,12 @@
 {
     [super viewDidLoad];
     [self loadSongModels];
-    [self loadSongAtIndex:1];
+    [self loadSongs];
+}
+- (void) loadSongs {
+    for (int i = 0;i < [songs count]; i++) {
+        [self loadSongAtIndex:i];
+    }
 }
 - (void) loadSongModels {
     SongModel* model1 = [SongModel songModelWith:@"Tylor Swift"
@@ -78,9 +83,9 @@
     
     the_view.userInteractionEnabled = YES;
     
-    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.panGesture setDelegate:self];
-    [the_view addGestureRecognizer:self.panGesture];
+    //self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    //[self.panGesture setDelegate:self];
+    //[the_view addGestureRecognizer:self.panGesture];
 
 }
 
@@ -97,7 +102,7 @@
         UIImage* image = [UIImage imageNamed:model.imageName];
         SongView* view = [SongView songViewWithImageAndRadius:image :100];
         SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-        view.center = CGPointMake(self.view.center.x, self.view.center.y - 100);
+        view.center = CGPointMake(self.view.center.x + index * self.view.frame.size.width, self.view.center.y - 100);
         [self addSubControllerAndView:svc ToView:self.view];
         [self addGestureRecognizersToView:self.view];
         curSong = index;

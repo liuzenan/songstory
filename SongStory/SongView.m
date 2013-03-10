@@ -117,7 +117,7 @@
         circle.layer.cornerRadius = radius / 3;
         circle.layer.borderColor = [UIColor lightGrayColor].CGColor;
         circle.layer.borderWidth = 3;
-        circle.alpha = 0.5;
+        circle.alpha = 0.7;
         circle.center = self.center;
         
         [self addSubview:circle];
