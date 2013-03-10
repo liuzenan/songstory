@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SongViewController.h"
 #import "SongPlayListDelegate.h"
-@interface PlaylistViewController : UIViewController<UIGestureRecognizerDelegate,SongPlayListDelegate>
+@interface PlaylistViewController : UIViewController <SongPlayListDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITabBarItem *playListTab;
 

@@ -66,6 +66,10 @@
 }
 
 - (void)addStateImage:(PlayState)state {
+    if (controlImage) {
+        [controlImage removeFromSuperview];
+        controlImage = nil;
+    }
     if (state == kStateInit) {
         controlImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_PLAY_IMAGE]];
         CGFloat scale = self.bounds.size.height / controlImage.bounds.size.height ;

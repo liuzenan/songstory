@@ -9,8 +9,6 @@
 #import "PlaylistViewController.h"
 
 @interface PlaylistViewController ()
-@property (nonatomic,strong) UISwipeGestureRecognizer* rightSwipeGesture;
-@property (nonatomic,strong) UISwipeGestureRecognizer* leftSwipeGesture;
 
 @property (nonatomic,strong) NSMutableArray* songs;
 extern CGFloat const DEFAULT_SONG_VIEW_RADIUS;
@@ -19,9 +17,7 @@ extern CGFloat const DEFAULT_SONG_VIEW_SEPERATION;
 @end
 
 @implementation PlaylistViewController {
-    int curSong;
     SongViewController *curSongController;
-    CGPoint panStartPoint;
 }
 @synthesize songs,scrollView,playListTab;
 CGFloat const DEFAULT_SONG_VIEW_RADIUS = 100.0;
@@ -86,7 +82,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     [view addSubview:subcontroller.view];
     [subcontroller didMoveToParentViewController:self];
 }
-
+/*
 - (void)addGestureRecognizersToView:(UIView *)the_view {
     
     the_view.userInteractionEnabled = YES;
@@ -104,7 +100,7 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     [the_view addGestureRecognizer:self.leftSwipeGesture];
 
 }
-
+*/
 - (void) loadSongs {
     if ([songs count] == 0) {
         //TODO Tell user there is no song
@@ -115,82 +111,39 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
         [self loadSongAtIndex:i];
     }
 
-    //CGRect screenFrame = [UIScreen mainScreen].bounds;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
     [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
 }
-- (void) nextSong {
-     NSLog(@"Next",nil);
-     /*
-    if (curSong + 1 < [songs count]) {
-        [curSongController isGoingToChange];
-        for (SongViewController *svc in [self childViewControllers]) {
-            CGPoint newCenter = CGPointMake(svc.songview.center.x - 2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION, svc.songview.center.y);
-            [UIView animateWithDuration:0.5
-                                  delay:0.0
-                                options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
-                             animations:^{
-                                 svc.songview.center  = newCenter;
-                             }completion:^(BOOL finished){
-                                 
-            }];
-        }
-    }*/
-}
 
-- (void) lastSong {
-    NSLog(@"Last",nil);
-    /*
-    if (curSong - 1  >= 0) {
-        [curSongController isGoingToChange];
-        for (SongViewController *svc in [self childViewControllers]) {
-            CGPoint newCenter = CGPointMake(svc.songview.center.x + 2 * DEFAULT_SONG_VIEW_RADIUS + DEFAULT_SONG_VIEW_SEPERATION, svc.songview.center.y);
-            [UIView animateWithDuration:0.5
-                                  delay:0.0
-                                options:(UIViewAnimationCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction)
-                             animations:^{
-                                 svc.songview.center  = newCenter;
-                             }completion:^(BOOL finished){
-                                 
-                             }];
-        }
 
-    }*/
-}
-
-/*
-- (void) loadSongViewAtIndexAsLastSong:(CGFloat)index {
-    SongModel * model = (SongModel*)[songs objectAtIndex:index];
-    UIImage* image = [UIImage imageNamed:model.imageName];
-    SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_WIDTH];
-}
-
-- (void) loadSongViewAtIndexAsNextSong:(CGFloat)index {
-    
-}*/
 - (void) loadSongAtIndex:(CGFloat)index {
-    
-    // Load current song
     SongModel * model = (SongModel*)[songs objectAtIndex:index];
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
     view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS);
+    svc.delegate = self;
     [self addSubControllerAndView:svc ToView:self.view];
-    curSong = index;
-    curSongController = svc;
-}
-
-
-- (void) swipeRight:(UISwipeGestureRecognizer *)gesture {
-    [self lastSong];
     
 }
-- (void) swipeLeft:(UISwipeGestureRecognizer *)gesture {
-    [self nextSong];
+
+
+
+
+// SongPlayListDelegate methods
+- (void) didStartedPlaying:(id)sender {
+    SongViewController* cur_svc = (SongViewController*)sender;
+    for (SongViewController *svc in self.childViewControllers) {
+        if (svc != cur_svc) {
+            [svc reinit];
+        }
+    }
 }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (void) didPausedPlaying:(id)sender {
+    
+}
+- (void) didFinishedPlaying:(id)sender {
+
 }
 @end

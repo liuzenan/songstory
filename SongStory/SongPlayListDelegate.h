@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @protocol SongPlayListDelegate <NSObject>
-- (void) didStartedPlaying;
-- (void) didPausedPlaying;
-- (void) didPausedPlaying;
+- (void) didStartedPlaying:(id)sender;
+- (void) didPausedPlaying:(id)sender;
+- (void) didFinishedPlaying:(id)sender;
+
 @end

@@ -23,7 +23,7 @@ extern CGFloat const UPDATE_INTERVAL;
 
 CGFloat const UPDATE_INTERVAL = 0.01;
 
-@synthesize songview,songmodel,timer,avPlayer;
+@synthesize songview,songmodel,timer,avPlayer,delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -168,13 +168,16 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     [songview addStateImage:kStatePause];
     [avPlayer stop];
     [self stopRotate];
+    [delegate didPausedPlaying:self];
 }
 
 - (void) stop {
     [songview addStateImage:kStateStop];
     [self setProgressPercent:0];
     [avPlayer stop];
+    avPlayer.currentTime = -avPlayer.currentTime;
     [self stopRotate];
+    [delegate didFinishedPlaying:self];
 }
 
 - (void)play
@@ -183,12 +186,18 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     [self startRotate];
     [avPlayer prepareToPlay];
     [avPlayer play];
+    [delegate didStartedPlaying:self];
 }
 
 
-- (void) isGoingToChange {
-    [self stop];
-    [songview removeStateImage];
+- (void) reinit {
+    [songview addStateImage:kStateInit];
+    songview.transform = CGAffineTransformMakeRotation(0.0);
+    [self setProgressPercent:0];
+    [avPlayer stop];
+    avPlayer.currentTime = -avPlayer.currentTime;
+    [self stopRotate];
+   
 }
 - (void)jumpTo:(CGFloat)percent {
     if (percent < 0) {
