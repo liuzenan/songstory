@@ -106,8 +106,6 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
     [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
     
-    
-
 }
 
 
@@ -116,7 +114,8 @@ CGFloat const DEFAULT_SONG_VIEW_SEPERATION = 10.0;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width, self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
+    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width,
+                              self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
     svc.delegate = self;
     [self addSubControllerAndView:svc ToView:self.view];
     

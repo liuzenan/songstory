@@ -34,7 +34,6 @@
 		E415EE9716EAFAB500437179 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EE9616EAFAB500437179 /* Default@2x.png */; };
 		E415EE9916EAFAB500437179 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EE9816EAFAB500437179 /* Default-568h@2x.png */; };
 		E415EE9C16EAFAB500437179 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E415EE9A16EAFAB500437179 /* MainStoryboard.storyboard */; };
-		E415EE9F16EAFAB500437179 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E415EE9E16EAFAB500437179 /* FirstViewController.m */; };
 		E415EEA116EAFAB500437179 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EEA016EAFAB500437179 /* first.png */; };
 		E415EEA316EAFAB500437179 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E415EEA216EAFAB500437179 /* first@2x.png */; };
 		E415EEA616EAFAB500437179 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E415EEA516EAFAB500437179 /* SecondViewController.m */; };
@@ -52,6 +51,8 @@
 		E45114B116EBBA0F0045411C /* bariol_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E45114AE16EBBA0F0045411C /* bariol_regular.ttf */; };
 		E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45114B316EBCACD0045411C /* StoryListViewController.m */; };
 		E45BE2BE16EC6272007460C6 /* SongStoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45BE2BD16EC6272007460C6 /* SongStoryView.m */; };
+		E45BE2CE16EC73CB007460C6 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45BE2CD16EC73CB007460C6 /* ExploreViewController.m */; };
+		E45BE2D116EC7B63007460C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45BE2D016EC7B62007460C6 /* ViewController.m */; };
 		E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD116EB1E9D00F82D74 /* SongViewController.m */; };
 		E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD416EB1EAE00F82D74 /* SongModel.m */; };
 		E4786AD816EB1EBB00F82D74 /* SongView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4786AD716EB1EBB00F82D74 /* SongView.m */; };
@@ -105,8 +106,6 @@
 		E415EE9616EAFAB500437179 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E415EE9816EAFAB500437179 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E415EE9B16EAFAB500437179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		E415EE9D16EAFAB500437179 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		E415EE9E16EAFAB500437179 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		E415EEA016EAFAB500437179 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		E415EEA216EAFAB500437179 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		E415EEA416EAFAB500437179 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -135,6 +134,10 @@
 		E45114B316EBCACD0045411C /* StoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryListViewController.m; sourceTree = "<group>"; };
 		E45BE2BC16EC6272007460C6 /* SongStoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongStoryView.h; sourceTree = "<group>"; };
 		E45BE2BD16EC6272007460C6 /* SongStoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongStoryView.m; sourceTree = "<group>"; };
+		E45BE2CC16EC73CB007460C6 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		E45BE2CD16EC73CB007460C6 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		E45BE2CF16EC7B62007460C6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E45BE2D016EC7B62007460C6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E4786AD016EB1E9D00F82D74 /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongViewController.h; sourceTree = "<group>"; };
 		E4786AD116EB1E9D00F82D74 /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongViewController.m; sourceTree = "<group>"; };
 		E4786AD316EB1EAE00F82D74 /* SongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongModel.h; sourceTree = "<group>"; };
@@ -227,8 +230,6 @@
 				E415EE9116EAFAB500437179 /* AppDelegate.h */,
 				E415EE9216EAFAB500437179 /* AppDelegate.m */,
 				E415EE9A16EAFAB500437179 /* MainStoryboard.storyboard */,
-				E415EE9D16EAFAB500437179 /* FirstViewController.h */,
-				E415EE9E16EAFAB500437179 /* FirstViewController.m */,
 				E415EEA416EAFAB500437179 /* SecondViewController.h */,
 				E415EEA516EAFAB500437179 /* SecondViewController.m */,
 				1DF0A17B16EBF83600D4BC20 /* SongPlayListDelegate.h */,
@@ -236,7 +237,11 @@
 				1D77DA0516EB9EC1003A6F9F /* Constant.m */,
 				E417DEFA16EB2667000F2BFE /* PlaylistViewController.h */,
 				E417DEFB16EB2667000F2BFE /* PlaylistViewController.m */,
+				E45BE2CC16EC73CB007460C6 /* ExploreViewController.h */,
+				E45BE2CD16EC73CB007460C6 /* ExploreViewController.m */,
 				E415EE8916EAFAB500437179 /* Supporting Files */,
+				E45BE2CF16EC7B62007460C6 /* ViewController.h */,
+				E45BE2D016EC7B62007460C6 /* ViewController.m */,
 			);
 			path = SongStory;
 			sourceTree = "<group>";
@@ -453,7 +458,6 @@
 			files = (
 				E415EE8F16EAFAB500437179 /* main.m in Sources */,
 				E415EE9316EAFAB500437179 /* AppDelegate.m in Sources */,
-				E415EE9F16EAFAB500437179 /* FirstViewController.m in Sources */,
 				E415EEA616EAFAB500437179 /* SecondViewController.m in Sources */,
 				E4786AD216EB1E9D00F82D74 /* SongViewController.m in Sources */,
 				E4786AD516EB1EAE00F82D74 /* SongModel.m in Sources */,
@@ -468,6 +472,8 @@
 				E451149616EB2C720045411C /* Comment.m in Sources */,
 				E45114B416EBCACD0045411C /* StoryListViewController.m in Sources */,
 				E45BE2BE16EC6272007460C6 /* SongStoryView.m in Sources */,
+				E45BE2CE16EC73CB007460C6 /* ExploreViewController.m in Sources */,
+				E45BE2D116EC7B63007460C6 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
