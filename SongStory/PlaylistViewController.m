@@ -54,6 +54,7 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     self.storyList = storyList;
     self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"storybackground.png"]];
     scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
     [self loadSongModels];
     [self loadSongs];
     [self addGestureRecognizersToView:self.view];
@@ -80,16 +81,15 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
                 svc.songview.alpha = 0;
             }
         }
-        
         [self.view addSubview:self.storyList.view];
         isCommentMode = YES;
         lastCenter = curSVC.view.center;
         lastTransform = curSVC.view.transform;
-        CGFloat scale = DEFAULT_MINIMIZED_VIEW_HEIGHT / curSVC.songview.frame.size.height;
+        CGFloat scale = DEFAULT_MINIMIZED_VIEW_HEIGHT / curSVC.songview.bounds.size.height;
         CGAffineTransform transform = CGAffineTransformScale(curSVC.songview.transform, scale,scale);
-        CGPoint center = CGPointMake(curSVC.view.frame.origin.x +
-                                     curSVC.view.frame.size.width -
-                                     DEFAULT_MINIMIZED_VIEW_HEIGHT /2 + 50, curSVC.view.frame.origin.y - 50);
+        CGPoint center = CGPointMake(curSVC.view.bounds.origin.x +
+                                     curSVC.view.bounds.size.width -
+                                     DEFAULT_MINIMIZED_VIEW_HEIGHT /2 + 55, curSVC.view.bounds.origin.y + 15);
         [curSVC togglePlayView:center :transform];
     } else {
         for (SongViewController *svc in self.childViewControllers ) {
@@ -113,9 +113,9 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
 }
 
 - (void) loadSongModels {
-    SongModel* model1 = [SongModel songModelWith:@"Tylor Swift"
-                                           Album:@"Fearkess"
-                                           Title:@"Fearkess"
+    SongModel* model1 = [SongModel songModelWith:@"Taylor Swift"
+                                           Album:@"Fearless"
+                                           Title:@"Fearless"
                                           Writer:@"Taylor Swift, Liz Rose, Hillary Lindsey"
                                        ImageName:@"cover1.jpg"
                                              URL:@"music3.mp3"];
@@ -168,11 +168,6 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     for (int i = 0; i < [songs count]; i++) {
         [self loadSongAtIndex:i];
     }
-
-    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    CGFloat scrollViewWidth = [songs count] * [UIScreen mainScreen].bounds.size.width;
-    [scrollView setContentSize:CGSizeMake(scrollViewWidth,scrollView.frame.size.height - 49)];
-
 }
 
 
@@ -181,9 +176,7 @@ CGFloat const DEFAULT_MINIMIZED_VIEW_HEIGHT = 50;
     UIImage* image = [UIImage imageNamed:model.imageName];
     SongView* view = [SongView songViewWithImageAndRadius:image :DEFAULT_SONG_VIEW_RADIUS];
     SongViewController *svc = [SongViewController songViewControllerWithViewAndModel:view Model:model];
-    view.center = CGPointMake(self.view.center.x + index * [UIScreen mainScreen].bounds.size.width,
-                              self.view.center.y - DEFAULT_SONG_VIEW_RADIUS / 2);
-
+    view.center = CGPointMake(scrollView.bounds.size.width / 2 + index * (scrollView.frame.size.width), scrollView.bounds.size.height / 2 - 40);
     svc.delegate = self;
     [self addSubControllerAndView:svc ToView:scrollView];
     

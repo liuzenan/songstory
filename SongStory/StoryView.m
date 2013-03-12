@@ -44,7 +44,7 @@
         [self addSubview:comments];
         
         self.frame = CGRectMake(STORY_MARGIN,
-                                50,
+                                80,
                                 self.storyInfo.frame.size.width,
                                 self.storyInfo.frame.size.height + self.storyView.frame.size.height + self.comments.frame.size.height);
     }

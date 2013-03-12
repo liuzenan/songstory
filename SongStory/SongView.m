@@ -104,22 +104,20 @@
         self.frame = CGRectMake(0, 0, 2*radius, 2*radius);
         self.layer.cornerRadius = radius;
         self.layer.masksToBounds = YES;
-        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.layer.borderWidth = 1.5;
         CALayer* shadowLayer = [CALayer layer];
         [self.layer addSublayer:shadowLayer];
         
         middle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 2, radius / 2)];
         middle.layer.cornerRadius = radius / 4;
         middle.backgroundColor = [UIColor whiteColor];
-        middle.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        middle.layer.borderColor = [UIColor whiteColor].CGColor;
         middle.layer.borderWidth = 1;
         middle.alpha = 1;
         middle.center = self.center;
         
         circle = [[UIView alloc] initWithFrame:CGRectMake(self.center.x, self.center.y, radius / 1.5, radius / 1.5)];
         circle.layer.cornerRadius = radius / 3;
-        circle.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        circle.layer.borderColor = [UIColor whiteColor].CGColor;
         circle.layer.borderWidth = 3;
         circle.alpha = 0.7;
         circle.center = self.center;

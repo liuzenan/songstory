@@ -221,8 +221,24 @@ CGFloat const UPDATE_INTERVAL = 0.01;
     
     if (songview.userInteractionEnabled == YES) {
         if (!informationBox) {
-            informationBox = [[UIView alloc] init];
-            //informationBox.center = CGPointMake(center.x );
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            informationBox = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 70)];
+            informationBox.layer.borderWidth = 1.0f;
+            informationBox.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:0.8f].CGColor;
+            informationBox.backgroundColor = [UIColor whiteColor];
+            UILabel *songTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, screenRect.size.width - 80, 20)];
+            songTitle.text = songmodel.title;
+            [songTitle setFont:[UIFont fontWithName:@"Merriweather-Bold" size:18]];
+            songTitle.textAlignment = NSTextAlignmentRight;
+            
+            UILabel *singerName = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, screenRect.size.width - 80, 16)];
+            singerName.text = songmodel.artist;
+            [singerName setFont:[UIFont fontWithName:@"Bariol" size:14]];
+            singerName.textAlignment = NSTextAlignmentRight;
+            
+            [self.view.superview.superview insertSubview:informationBox belowSubview:self.view.superview];
+            [informationBox addSubview:songTitle];
+            [informationBox addSubview:singerName];
             informationBox.alpha = 0;
             
         }
